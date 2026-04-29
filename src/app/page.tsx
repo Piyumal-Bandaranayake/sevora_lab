@@ -3,27 +3,19 @@
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { 
-  Code2, 
-  Layout, 
-  Smartphone, 
-  BarChart3, 
-  Globe, 
   Zap,
   ArrowRight,
-  CheckCircle2,
   Users,
   Trophy,
-  Calendar,
-  Search,
-  Palette,
-  Camera,
-  Image
+  Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ProjectCard } from "@/components/ProjectCard";
+import { services } from "@/data/services";
+import { projects } from "@/data/portfolio";
 
 const Robot3D = dynamic(() => import("@/components/Robot3D"), {
   ssr: false,
@@ -40,62 +32,7 @@ const stats = [
   { label: "Years Experience", value: "10+", icon: Calendar },
 ];
 
-const servicesTeaser = [
-  {
-    title: "Website Design",
-    description: "Visually stunning and user-centric designs that capture your brand essence and engage visitors.",
-    Icon: Layout,
-  },
-  {
-    title: "Web Development",
-    description: "High-performance, scalable web applications built with the latest technologies for maximum speed.",
-    Icon: Code2,
-  },
-  {
-    title: "SEO Optimization",
-    description: "Boost your search engine rankings and drive organic traffic with our data-driven SEO strategies.",
-    Icon: Search,
-  },
-  {
-    title: "Logo Design",
-    description: "Memorable and unique logo designs that establish a strong brand identity for your business.",
-    Icon: Palette,
-  },
-  {
-    title: "Videography & Dronagraphy",
-    description: "High-quality video production and drone footage to showcase your projects from stunning angles.",
-    Icon: Camera,
-  },
-  {
-    title: "Social Media Post Design",
-    description: "Creative and engaging social media posts designed to capture attention and grow your audience.",
-    Icon: Image,
-  },
-];
-
-const projects = [
-  {
-    title: "CafeX - Responsive Site",
-    category: "Design & Development",
-    image: "/project-1.png",
-    tags: ["Next.js", "Tailwind", "Framer Motion"],
-  },
-  {
-    title: "TechCorp - E-commerce",
-    category: "E-commerce",
-    image: "/project-2.png",
-    tags: ["React", "Custom API", "Stripe"],
-  },
-  {
-    title: "ClinicPro - Booking",
-    category: "SaaS",
-    image: "/project-1.png",
-    tags: ["Supabase", "TypeScript", "Dashboard"],
-  },
-];
-
 export default function Home() {
-
   return (
     <div className="flex flex-col min-h-screen bg-[#020617]">
       <Header />
@@ -191,7 +128,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {servicesTeaser.map((service, index) => (
+            {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
             ))}
           </div>
@@ -208,7 +145,7 @@ export default function Home() {
               <Button variant="outline">View All Projects</Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
+              {projects.slice(0, 3).map((project, index) => (
                 <ProjectCard key={index} {...project} />
               ))}
             </div>

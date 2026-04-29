@@ -6,35 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Button } from "@/components/ui/Button";
-
-const categories = ["All", "Design", "Development", "E-commerce"];
-
-const projects = [
-  {
-    title: "CafeX - Responsive Site",
-    category: "Design",
-    image: "/project-1.png",
-    tags: ["React", "Tailwind", "Next.js"],
-  },
-  {
-    title: "TechCorp - E-commerce",
-    category: "E-commerce",
-    image: "/project-2.png",
-    tags: ["Shopify", "Custom API", "Node.js"],
-  },
-  {
-    title: "ClinicPro - Booking System",
-    category: "Development",
-    image: "/project-1.png",
-    tags: ["Next.js", "Supabase", "Zod"],
-  },
-  {
-    title: "Luxury Homes - Property",
-    category: "Design",
-    image: "/project-2.png",
-    tags: ["Framer", "UI/UX", "WebGL"],
-  },
-];
+import { projects, categories } from "@/data/portfolio";
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("All");
@@ -82,7 +54,7 @@ export default function Portfolio() {
         <section className="container mx-auto px-6 mb-24">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project) => (
                 <ProjectCard 
                   key={project.title} 
                   {...project} 
