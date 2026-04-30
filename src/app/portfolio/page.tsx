@@ -58,7 +58,6 @@ export default function Portfolio() {
                 <ProjectCard 
                   key={project.title} 
                   {...project} 
-                  onViewDetails={() => alert("Case study coming soon!")}
                 />
               ))}
             </AnimatePresence>
