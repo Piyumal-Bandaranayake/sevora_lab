@@ -1,16 +1,10 @@
 "use client";
 
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { 
-  Code2, 
-  Layout, 
-  Smartphone, 
-  BarChart3, 
-  Globe, 
   Zap,
   ArrowRight,
-  CheckCircle2,
   Users,
   Trophy,
   Calendar
@@ -20,50 +14,22 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ProjectCard } from "@/components/ProjectCard";
+import { services } from "@/data/services";
+import { projects } from "@/data/portfolio";
+
+const Robot3D = dynamic(() => import("@/components/Robot3D"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[400px] md:h-[550px] lg:h-[600px] flex items-center justify-center">
+      <div className="w-12 h-12 border-2 border-[#3B82F6] border-t-transparent rounded-full animate-spin" />
+    </div>
+  ),
+});
 
 const stats = [
   { label: "Successful Projects", value: "150+", icon: Trophy },
   { label: "Happy Clients", value: "80+", icon: Users },
   { label: "Years Experience", value: "10+", icon: Calendar },
-];
-
-const servicesTeaser = [
-  {
-    title: "Website Design",
-    description: "Visually stunning and user-centric designs that capture your brand essence and engage visitors.",
-    Icon: Layout,
-  },
-  {
-    title: "Web Development",
-    description: "High-performance, scalable web applications built with the latest technologies for maximum speed.",
-    Icon: Code2,
-  },
-  {
-    title: "Mobile Solutions",
-    description: "Fully responsive designs that provide an optimal viewing experience across all mobile devices.",
-    Icon: Smartphone,
-  },
-];
-
-const projects = [
-  {
-    title: "CafeX - Responsive Site",
-    category: "Design & Development",
-    image: "/project-1.png",
-    tags: ["Next.js", "Tailwind", "Framer Motion"],
-  },
-  {
-    title: "TechCorp - E-commerce",
-    category: "E-commerce",
-    image: "/project-2.png",
-    tags: ["React", "Custom API", "Stripe"],
-  },
-  {
-    title: "ClinicPro - Booking",
-    category: "SaaS",
-    image: "/project-1.png",
-    tags: ["Supabase", "TypeScript", "Dashboard"],
-  },
 ];
 
 export default function Home() {
@@ -73,70 +39,84 @@ export default function Home() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden">
-          <Image
-            src="/hero-bg.png"
-            alt="Hero Background"
-            fill
-            className="object-cover opacity-25"
-            priority
+        <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-[#020617] py-20">
+          {/* Background glow effects */}
+          <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#6366F1]/5 rounded-full blur-[100px]" />
+
+          {/* White spotlight behind the robot */}
+          <div
+            className="absolute top-1/2 right-[15%] -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.07] pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, #ffffff 0%, #ffffff 20%, transparent 70%)",
+            }}
+          />
+          <div
+            className="absolute top-[40%] right-[20%] -translate-y-1/2 w-[300px] h-[300px] rounded-full opacity-[0.04] pointer-events-none blur-[40px]"
+            style={{
+              background: "radial-gradient(circle, #ffffff 0%, transparent 60%)",
+            }}
           />
 
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
-          
-          <div className="container mx-auto px-6 relative z-10 text-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-4xl mx-auto space-y-8"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3B82F6]/10 text-[#3B82F6] font-bold text-sm tracking-wide border border-[#3B82F6]/20">
-                <Globe size={18} />
-                <span>Modern Web Solutions for Singapore Businesses</span>
-              </div>
-              <h1 className="text-5xl md:text-8xl font-bold tracking-tight text-white leading-tight">
-                Empowering Digital <span className="text-[#3B82F6] underline decoration-4 underline-offset-8">Transformation</span>
-              </h1>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="accent">
-                  Start Project <ArrowRight className="ml-2" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Our Work
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-          
-          {/* Subtle Glows */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#3B82F6]/10 rounded-full blur-[120px] -z-10" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-800/10 rounded-full blur-[120px] -z-10" />
-        </section>
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              
+              {/* Left Side – Text Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="space-y-6 text-center lg:text-left order-2 lg:order-1"
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6] text-sm font-medium">
+                  <Zap size={14} />
+                  Building Digital Experiences
+                </div>
 
-        {/* Stats Section */}
-        <section className="py-20 border-y border-white/5 bg-white/[0.02] backdrop-blur-sm">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-              {stats.map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  className="space-y-2 group"
-                >
-                  <div className="flex justify-center text-[#3B82F6] mb-4 transition-transform group-hover:scale-110">
-                    <stat.icon size={40} />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold text-white">{stat.value}</div>
-                  <div className="text-[#3B82F6]/60 font-medium uppercase tracking-widest text-sm">{stat.label}</div>
-                </motion.div>
-              ))}
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                  Sevora
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] to-[#6366F1]"> Lab</span>
+                </h1>
+
+                <p className="text-lg md:text-xl text-white/60 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                  We craft high-performance web applications and stunning digital experiences that elevate your brand and drive real results.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                  <Button size="lg" variant="accent" className="min-w-[180px] group">
+                    Start Project
+                    <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="min-w-[180px]">
+                    View Work
+                  </Button>
+                </div>
+
+                {/* Quick stats row */}
+                <div className="flex gap-8 justify-center lg:justify-start pt-4">
+                  {stats.map((stat, i) => (
+                    <div key={i} className="text-center lg:text-left">
+                      <div className="text-2xl font-bold text-white">{stat.value}</div>
+                      <div className="text-xs text-white/40 uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right Side – 3D Robot */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+                className="order-1 lg:order-2"
+              >
+                <Robot3D />
+              </motion.div>
+
             </div>
           </div>
         </section>
+
 
         {/* Services Teaser */}
         <section className="py-24 container mx-auto px-6">
@@ -148,7 +128,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {servicesTeaser.map((service, index) => (
+            {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
             ))}
           </div>
@@ -165,7 +145,7 @@ export default function Home() {
               <Button variant="outline">View All Projects</Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
+              {projects.slice(0, 3).map((project, index) => (
                 <ProjectCard key={index} {...project} />
               ))}
             </div>

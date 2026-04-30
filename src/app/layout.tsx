@@ -16,7 +16,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Sevora Lab | Modern Web Solutions for Singapore Businesses",
   description: "Sevora Lab is a premier web development company in Sri Lanka specializing in high-performance, beautiful websites for Singapore businesses.",
-  keywords: ["web development", "Singapore", "Sri Lanka", "Next.js", "agency", "tech solutions"],
+  keywords: ["web development", "Singapore", "Sri Lanka", "Next.js", "agency", "tech solutions", "SEO", "Logo Design", "Videography", "Dronagraphy", "Social Media Design"],
 };
 
 export default function RootLayout({
