@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { 
   Zap,
   ArrowRight,
@@ -16,6 +17,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { ProjectCard } from "@/components/ProjectCard";
 import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
+import { TechSection } from "@/components/TechSection";
 
 const Robot3D = dynamic(() => import("@/components/Robot3D"), {
   ssr: false,
@@ -27,9 +29,9 @@ const Robot3D = dynamic(() => import("@/components/Robot3D"), {
 });
 
 const stats = [
-  { label: "Successful Projects", value: "150+", icon: Trophy },
-  { label: "Happy Clients", value: "80+", icon: Users },
-  { label: "Years Experience", value: "10+", icon: Calendar },
+  { label: "Successful Projects", value: "10+", icon: Trophy },
+  { label: "Happy Clients", value: "10+", icon: Users },
+  { label: "Years Experience", value: "2+", icon: Calendar },
 ];
 
 export default function Home() {
@@ -119,49 +121,98 @@ export default function Home() {
 
 
         {/* Services Teaser */}
-        <section className="py-24 container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 className="text-[#3B82F6] font-bold uppercase tracking-widest text-sm">Our Expertise</h2>
-            <h3 className="text-4xl md:text-5xl font-bold text-white">Tailored Digital Solutions</h3>
-            <p className="text-lg text-white/60">
-              We specialize in creating bespoke web experiences that drive growth and deliver results.
-            </p>
+        <section className="py-24 relative overflow-hidden bg-[#020617]">
+          {/* Background image with fixed attachment */}
+          <div 
+            className="absolute inset-0 z-0 opacity-[0.3] bg-fixed bg-cover bg-center"
+            style={{ backgroundImage: "url('/service.jpg')" }}
+          />
+          
+          {/* Overlays */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
+            <div className="absolute inset-0 bg-[#020617]/60" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <ServiceCard key={index} {...service} />
-            ))}
-          </div>
-        </section>
 
-        {/* Portfolio Preview */}
-        <section className="py-24 bg-[#0A1128]/40 border-y border-white/5">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-              <div className="space-y-4">
-                <h2 className="text-[#3B82F6] font-bold uppercase tracking-widest text-sm">Recent Work</h2>
-                <h3 className="text-4xl md:text-5xl font-bold text-white">Success Stories</h3>
-              </div>
-              <Button variant="outline">View All Projects</Button>
+          {/* Background decoration */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[#3B82F6]/10 rounded-full blur-[180px] z-0" />
+          
+          {/* Large background text */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none z-0 opacity-[0.08] rotate-[-10deg]">
+            <span 
+              className="text-[12rem] md:text-[20rem] font-black leading-none tracking-tighter uppercase whitespace-nowrap" 
+              style={{ 
+                WebkitTextStroke: '2px white',
+                color: 'transparent'
+              }}
+            >
+              Services
+            </span>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+              <h2 className="text-[#3B82F6] font-bold uppercase tracking-widest text-sm">Our Expertise</h2>
+              <h3 className="text-4xl md:text-5xl font-bold text-white">Tailored Digital Solutions</h3>
+              <p className="text-lg text-white/60">
+                We specialize in creating bespoke web experiences that drive growth and deliver results.
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {projects.slice(0, 3).map((project, index) => (
-                <ProjectCard key={index} {...project} />
+              {services.map((service, index) => (
+                <ServiceCard key={index} {...service} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden">
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-[#3B82F6]/5 rounded-full blur-[150px] -z-10" />
+        {/* Technologies Section */}
+        <TechSection />
+
+        {/* Portfolio Preview */}
+        <section className="py-24 bg-[#0A1128]/40 border-y border-white/5">
           <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <h3 className="text-5xl md:text-7xl font-bold text-white">Look Our work</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              {projects.slice(0, 3).map((project, index) => (
+                <ProjectCard key={index} {...project} />
+              ))}
+            </div>
+            
+            <div className="flex justify-center">
+              <Link href="/portfolio">
+                <Button size="lg" variant="outline" className="group min-w-[200px]">
+                  View All Work
+                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-32 relative overflow-hidden">
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               className="bg-gradient-to-br from-[#0A1128] to-[#020617] border border-white/10 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl"
             >
+              {/* Background image with fixed attachment inside the box */}
+              <div 
+                className="absolute inset-0 z-0 opacity-[0.4] bg-fixed bg-cover bg-center"
+                style={{ backgroundImage: "url('/cta-bg.png')" }}
+              />
+              
+              {/* Overlays inside the box */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0A1128] via-transparent to-[#020617]" />
+                <div className="absolute inset-0 bg-[#020617]/40" />
+              </div>
+
               <div className="relative z-10 max-w-4xl mx-auto space-y-8">
                 <h2 className="text-4xl md:text-6xl font-bold leading-tight">Ready to build something <br /> extraordinary?</h2>
                 <p className="text-xl text-white/60">

@@ -10,12 +10,11 @@ interface ProjectCardProps {
   title: string;
   category: string;
   image: string;
-  tags: string[];
   demoUrl?: string;
   className?: string;
 }
 
-export function ProjectCard({ title, category, image, tags, demoUrl, className }: ProjectCardProps) {
+export function ProjectCard({ title, category, image, demoUrl, className }: ProjectCardProps) {
   const [isZoomed, setIsZoomed] = useState(false);
   const isLogo = category === "Logo";
 
@@ -69,25 +68,16 @@ export function ProjectCard({ title, category, image, tags, demoUrl, className }
           </div>
         </div>
 
-        <div className="p-8">
-          <div className="flex justify-between items-start mb-3">
-            <span className="text-[#3B82F6] text-xs font-bold uppercase tracking-widest px-3 py-1 bg-[#3B82F6]/10 rounded-full border border-[#3B82F6]/20">
-              {category}
-            </span>
-          </div>
-          <h3 className="text-2xl font-bold text-white group-hover:text-[#3B82F6] transition-colors">{title}</h3>
-          
-          <div className="flex flex-wrap gap-2 mt-6">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[10px] px-3 py-1.5 rounded-lg bg-white/5 text-white/40 font-bold border border-white/10 group-hover:border-white/20 transition-colors"
-              >
-                {tag}
+        {!isLogo && (
+          <div className="p-8">
+            <div className="flex justify-between items-start mb-3">
+              <span className="text-[#3B82F6] text-xs font-bold uppercase tracking-widest px-3 py-1 bg-[#3B82F6]/10 rounded-full border border-[#3B82F6]/20">
+                {category}
               </span>
-            ))}
+            </div>
+            <h3 className="text-2xl font-bold text-white group-hover:text-[#3B82F6] transition-colors">{title}</h3>
           </div>
-        </div>
+        )}
       </motion.div>
 
       {/* Zoom Modal for Logos */}
@@ -121,8 +111,13 @@ export function ProjectCard({ title, category, image, tags, demoUrl, className }
                 priority
               />
               <div className="absolute -bottom-12 left-0 right-0 text-center">
-                <h2 className="text-2xl font-bold text-white">{title}</h2>
-                <p className="text-white/40 uppercase tracking-widest text-sm mt-2">{category}</p>
+                {title && <h2 className="text-2xl font-bold text-white">{title}</h2>}
+                <p className={cn(
+                  "text-white/40 uppercase tracking-widest text-sm",
+                  title ? "mt-2" : "mt-0"
+                )}>
+                  {category}
+                </p>
               </div>
             </motion.div>
           </motion.div>
