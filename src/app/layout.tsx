@@ -14,9 +14,56 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sevora Lab | Modern Web Solutions for Singapore Businesses",
-  description: "Sevora Lab is a premier web development company in Sri Lanka specializing in high-performance, beautiful websites for Singapore businesses.",
-  keywords: ["web development", "Singapore", "Sri Lanka", "Next.js", "agency", "tech solutions", "SEO", "Logo Design", "Videography", "Dronagraphy", "Social Media Design"],
+  metadataBase: new URL("https://www.sevoralab.studio"),
+  title: {
+    default: "Sevora Lab | Premium Web Development & Digital Studio in Sri Lanka",
+    template: "%s | Sevora Lab",
+  },
+  description: "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",
+  keywords: [
+    "sevora lab",
+    "sevoralab",
+    "sevoralab.studio",
+    "sevora lab studio",
+    "web development sri lanka",
+    "software development company sri lanka",
+    "sri lanka tech developers",
+    "web design agency sri lanka",
+    "custom web applications",
+    "next.js development sri lanka",
+    "three.js developer",
+    "creative digital agency",
+    "logo design sri lanka",
+    "branding agency",
+    "videography & dronagraphy",
+    "social media design"
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.sevoralab.studio",
+    siteName: "Sevora Lab",
+    title: "Sevora Lab | Premium Web Development & Digital Studio in Sri Lanka",
+    description: "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Sevora Lab - Premium Web Development & Digital Studio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sevora Lab | Premium Web Development & Digital Studio in Sri Lanka",
+    description: "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

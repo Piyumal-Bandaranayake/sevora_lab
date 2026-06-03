@@ -15,11 +15,11 @@ export function Footer() {
              </span>
           </Link>
           <p className="max-w-xs leading-relaxed">
-            Crafting high-performance digital experiences for forward-thinking Singapore businesses.
+            Crafting high-performance digital experiences for forward-thinking businesses in Sri Lanka and globally.
           </p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-[#3B82F6] transition-colors"><Globe size={20} /></Link>
-            <Link href="#" className="hover:text-[#3B82F6] transition-colors"><Mail size={20} /></Link>
+            <Link href="mailto:hello@sevoralab.studio" className="hover:text-[#3B82F6] transition-colors"><Mail size={20} /></Link>
             <Link href="#" className="hover:text-[#3B82F6] transition-colors"><Share2 size={20} /></Link>
           </div>
         </div>
@@ -51,15 +51,15 @@ export function Footer() {
           <ul className="space-y-4">
             <li className="flex items-center gap-3">
               <MapPin size={18} className="text-[#3B82F6]" />
-              <span>Singapore, Tech Hub Central</span>
+              <span>Colombo, Sri Lanka</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-[#3B82F6]" />
-              <span>+65 8000 1234</span>
+              <span>+94 77 123 4567</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-[#3B82F6]" />
-              <span>hello@sevoralab.com</span>
+              <span>hello@sevoralab.studio</span>
             </li>
           </ul>
         </div>
