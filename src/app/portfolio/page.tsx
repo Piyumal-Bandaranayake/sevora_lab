@@ -11,9 +11,9 @@ import { projects, categories } from "@/data/portfolio";
 export default function Portfolio() {
   const [filter, setFilter] = useState("All");
 
-  const filteredProjects = filter === "All" 
+  const filteredProjects = filter.toLowerCase() === "all" 
     ? projects 
-    : projects.filter(p => p.category === filter);
+    : projects.filter(p => p.category.trim().toLowerCase() === filter.trim().toLowerCase());
 
   return (
     <div className="flex flex-col min-h-screen bg-[#020617]">
@@ -39,7 +39,7 @@ export default function Portfolio() {
                 key={cat}
                 onClick={() => setFilter(cat)}
                 className={`px-8 py-3 rounded-full text-sm font-bold transition-all ${
-                  filter === cat 
+                  filter.toLowerCase() === cat.toLowerCase() 
                     ? "bg-[#3B82F6] text-white shadow-[0_0_20px_rgba(59,130,246,0.2)]" 
                     : "glass text-white/50 hover:bg-white/5 border-white/10 hover:text-white"
                 }`}
@@ -56,7 +56,7 @@ export default function Portfolio() {
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
                 <ProjectCard 
-                  key={project.title} 
+                  key={project.image} 
                   {...project} 
                 />
               ))}
@@ -65,7 +65,7 @@ export default function Portfolio() {
         </section>
 
         {/* Call to Action */}
-        <section className="bg-gradient-to-t from-[#0A1128] to-[#020617] py-24 rounded-[3rem] container mx-auto mb-24 border border-white/5 shadow-2xll relative overflow-hidden">
+        <section className="bg-gradient-to-t from-[#0A1128] to-[#020617] py-24 rounded-[3rem] container mx-auto mb-24 border border-white/5 shadow-2xl relative overflow-hidden">
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#3B82F6]/5 blur-[120px] rounded-full" />
           <div className="text-center text-white px-6 relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold mb-8">Have a similar project in mind?</h2>
