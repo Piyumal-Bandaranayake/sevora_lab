@@ -7,7 +7,7 @@ import { ExternalLink, X, Maximize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ProjectCardProps {
-  title: string;
+  title?: string;
   category: string;
   image: string;
   demoUrl?: string;
@@ -41,7 +41,7 @@ export function ProjectCard({ title, category, image, demoUrl, className }: Proj
         <div className="relative aspect-video overflow-hidden">
           <Image
             src={image}
-            alt={title}
+            alt={title || `${category} Project`}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -105,7 +105,7 @@ export function ProjectCard({ title, category, image, demoUrl, className }: Proj
             >
               <Image
                 src={image}
-                alt={title}
+                alt={title || `${category} Project`}
                 fill
                 className="object-contain"
                 priority
