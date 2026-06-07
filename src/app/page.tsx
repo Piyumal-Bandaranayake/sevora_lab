@@ -31,8 +31,10 @@ export default function Home() {
 
   return (
     <>
+      {/* JSON-LD structured data for SEO — rendered server-side only */}
       <script
         type="application/ld+json"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HomeClient />

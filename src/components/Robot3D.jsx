@@ -11,9 +11,7 @@ import * as THREE from "three";
 function colouriseModel(scene) {
   // Log mesh names once so we can fine-tune later
   scene.traverse((child) => {
-    if (child.isMesh) {
-      console.log("Mesh:", child.name, "| Parent:", child.parent?.name);
-    }
+    if (!child.isMesh) return; // skip non-mesh log
   });
 
   scene.traverse((child) => {

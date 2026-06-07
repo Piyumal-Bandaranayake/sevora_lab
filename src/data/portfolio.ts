@@ -11,37 +11,37 @@ export const projects: PortfolioProject[] = [
   {
     title: "best Travel Sri Lanka",
     category: "Web Dev",
-    image: "/images/besttravel.png",
+    image: "/images/besttravel.webp",
     demoUrl: "https://besttravelsrilanka.lk",
   },
   {
     title: "MicroGreens Lanka",
     category: "Web Dev",
-    image: "/images/micro.png",
+    image: "/images/micro.webp",
     demoUrl: "https://microgreenslanka.lk",
   },
   {
     title: "Radha Lanka Tea",
     category: "Web Dev",
-    image: "/images/radha.png",
+    image: "/images/radha.webp",
     demoUrl: "https://radhalankatea.com",
   },
   {
     title: "Christian Marage Preopsal",
     category: "Web Dev",
-    image: "/images/marage.png",
+    image: "/images/marage.webp",
     demoUrl: "https://christianmarriageproposals.com",
   },
   {
     title: "Gate Automation",
     category: "Web Dev",
-    image: "/images/gate.png",
+    image: "/images/gate.webp",
     demoUrl: "https://www.gateautomationuk.co.uk/",
   },
   {
     title: "Pet Nexues",
     category: "Web Dev",
-    image: "/images/petNet.png",
+    image: "/images/petNet.webp",
     demoUrl: "https://pet-nexues.vercel.app/",
   },
   // ============================
@@ -49,26 +49,26 @@ export const projects: PortfolioProject[] = [
   // ============================
   {
     category: "Logo",
-    image: "/logos/1_2.jpg",
+    image: "/logos/1_2.webp",
   },
   {
     category: "Logo",
-    image: "/logos/10_logo-01.jpg",
+    image: "/logos/10_logo-01.webp",
   },
   {
     category: "Logo",
-    image: "/logos/10_logo-02.jpg",
+    image: "/logos/10_logo-02.webp",
   },
   {
     category: "Logo",
-    image: "/logos/10_logo-08.jpg",
+    image: "/logos/10_logo-08.webp",
   },
   {
     category: "Logo",
-    image: "/logos/10_logo-09.jpg",
+    image: "/logos/10_logo-09.webp",
   },
   {
     category: "Logo",
-    image: "/logos/123-01.jpg",
+    image: "/logos/123-01.webp",
   },
 ];
