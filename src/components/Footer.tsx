@@ -53,7 +53,7 @@ export function Footer() {
           <ul className="space-y-4">
             <li className="flex items-center gap-3">
               <MapPin size={18} className="text-[#3B82F6]" />
-              <span>Colombo, Sri Lanka</span>
+              <span>Matale, Sri Lanka</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-[#3B82F6]" />

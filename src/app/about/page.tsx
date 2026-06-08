@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "next.js developer team",
     "web design team sri lanka",
     "boutique tech agency sri lanka",
-    "software engineers colombo",
+    "software engineers matale",
     "expert web developers sri lanka",
     "tech startup sri lanka",
     "sevoralab about us"

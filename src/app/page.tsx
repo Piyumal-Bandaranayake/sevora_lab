@@ -18,7 +18,7 @@ export default function Home() {
     "telephone": "+94 77 575 2149",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Colombo",
+      "addressLocality": "Matale",
       "addressCountry": "LK"
     },
     "description": "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",

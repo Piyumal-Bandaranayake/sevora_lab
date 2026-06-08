@@ -9,9 +9,9 @@ export const metadata: Metadata = {
     "sevora lab phone number",
     "sevora lab email",
     "hire web developers sri lanka",
-    "hire next.js developers colombo",
+    "hire next.js developers matale",
     "web development consultation sri lanka",
-    "software company colombo contact",
+    "software company matale contact",
     "request website quote sri lanka",
     "get a free quote web development"
   ],
