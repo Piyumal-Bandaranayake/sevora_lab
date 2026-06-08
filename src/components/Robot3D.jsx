@@ -146,12 +146,11 @@ function RobotModel() {
     }
   }, [scene]);
 
-  // Track pointer over canvas
+  // Track pointer across the entire window for maximum responsiveness
   const onPointerMove = useCallback((e) => {
-    const rect = gl.domElement.getBoundingClientRect();
-    mouse.current.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.current.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-  }, [gl]);
+    mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  }, []);
 
   const onPointerLeave = useCallback(() => {
     mouse.current.x = 0;
@@ -159,35 +158,45 @@ function RobotModel() {
   }, []);
 
   useEffect(() => {
-    const el = gl.domElement;
-    el.addEventListener("pointermove", onPointerMove);
-    el.addEventListener("pointerleave", onPointerLeave);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerleave", onPointerLeave);
     return () => {
-      el.removeEventListener("pointermove", onPointerMove);
-      el.removeEventListener("pointerleave", onPointerLeave);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, [gl, onPointerMove, onPointerLeave]);
+  }, [onPointerMove, onPointerLeave]);
 
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    // Floating
+    // Floating animation
     groupRef.current.position.y =
       Math.sin(state.clock.elapsedTime * 0.8) * 0.1;
 
-    // Head follows cursor
+    // Rotate/tilt the entire body slightly to follow the cursor
+    const targetGroupY = mouse.current.x * 0.35;
+    const targetGroupX = mouse.current.y * -0.15;
+
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y, targetGroupY, 0.05
+    );
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x, targetGroupX, 0.05
+    );
+
+    // Head follows cursor with a larger range of movement
     if (headRef.current) {
       const baseX = headOriginalRot.current.x;
       const baseY = headOriginalRot.current.y;
 
-      const targetY = baseY + mouse.current.x * 0.6;
-      const targetX = baseX + mouse.current.y * -0.35;
+      const targetHeadY = baseY + mouse.current.x * 0.5;
+      const targetHeadX = baseX + mouse.current.y * -0.3;
 
       headRef.current.rotation.y = THREE.MathUtils.lerp(
-        headRef.current.rotation.y, targetY, 0.06
+        headRef.current.rotation.y, targetHeadY, 0.06
       );
       headRef.current.rotation.x = THREE.MathUtils.lerp(
-        headRef.current.rotation.x, targetX, 0.06
+        headRef.current.rotation.x, targetHeadX, 0.06
       );
     }
   });
@@ -251,10 +260,10 @@ export default function Robot3D() {
           <OrbitControls
             enableZoom={false}
             enablePan={false}
-            autoRotate
-            autoRotateSpeed={1}
             maxPolarAngle={Math.PI / 1.8}
             minPolarAngle={Math.PI / 3}
+            minAzimuthAngle={0}
+            maxAzimuthAngle={0}
           />
         </Suspense>
       </Canvas>
