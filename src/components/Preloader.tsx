@@ -13,7 +13,7 @@ export function Preloader() {
     const timer = setTimeout(() => {
       setLoading(false);
       document.body.style.overflow = "unset";
-    }, 10000);
+    }, 4000);
 
     return () => {
       clearTimeout(timer);
