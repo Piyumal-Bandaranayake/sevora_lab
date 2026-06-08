@@ -6,10 +6,15 @@ export const metadata: Metadata = {
   description: "Browse the portfolio of Sevora Lab. Discover our custom web development projects, modern logo designs, professional posters, and high-quality videography projects in Sri Lanka.",
   keywords: [
     "sevora lab portfolio",
+    "sevora lab projects",
     "web design gallery sri lanka",
     "software projects portfolio",
     "brand designs gallery",
-    "drone photography sri lanka"
+    "drone photography sri lanka",
+    "next.js website showcase",
+    "custom web app examples",
+    "corporate logo designs gallery",
+    "commercial videography portfolio sri lanka"
   ],
   alternates: {
     canonical: "/portfolio",
