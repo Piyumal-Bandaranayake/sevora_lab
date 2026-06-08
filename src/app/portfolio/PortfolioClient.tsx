@@ -16,10 +16,18 @@ export default function PortfolioClient() {
     : projects.filter(p => p.category.trim().toLowerCase() === filter.trim().toLowerCase());
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617]">
+    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.2] bg-fixed bg-cover bg-center pointer-events-none"
+        style={{ backgroundImage: "url('/service.jpg')" }}
+      />
+      {/* Dark overlay to blend in */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
+
       <Header />
       
-      <main className="flex-1 pt-32 pb-20">
+      <main className="flex-1 pt-32 pb-20 relative z-10">
         <section className="container mx-auto px-6 mb-20">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">

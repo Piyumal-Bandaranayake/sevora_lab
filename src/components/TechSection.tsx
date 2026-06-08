@@ -6,56 +6,47 @@ const technologies = [
   {
     name: "Next.js",
     icon: <img src="/icon/Next.js.svg" alt="Next.js" className="w-12 h-12 object-contain brightness-0 invert" />,
-    color: "from-white/10 to-white/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+    glowColor: "rgba(255, 255, 255, 0.18)"
   },
   {
     name: "React",
     icon: <img src="/icon/React.svg" alt="React" className="w-12 h-12 object-contain" />,
-    color: "from-[#61DAFB]/10 to-[#61DAFB]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(97,218,251,0.2)]"
+    glowColor: "rgba(97, 218, 251, 0.25)"
   },
   {
     name: "Tailwind CSS",
     icon: <img src="/icon/Tailwind CSS.svg" alt="Tailwind CSS" className="w-12 h-12 object-contain" />,
-    color: "from-[#38BDF8]/10 to-[#38BDF8]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(56,189,248,0.2)]"
+    glowColor: "rgba(56, 189, 248, 0.25)"
   },
   {
     name: "Node.js",
     icon: <img src="/icon/Node.js.svg" alt="Node.js" className="w-12 h-12 object-contain" />,
-    color: "from-[#339933]/10 to-[#339933]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(51,153,51,0.2)]"
+    glowColor: "rgba(51, 153, 51, 0.25)"
   },
   {
     name: "PHP",
     icon: <img src="/icon/PHP.svg" alt="PHP" className="w-12 h-12 object-contain" />,
-    color: "from-[#777BB4]/10 to-[#777BB4]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(119,123,180,0.2)]"
+    glowColor: "rgba(119, 123, 180, 0.25)"
   },
   {
     name: "MySQL",
     icon: <img src="/icon/MySQL.svg" alt="MySQL" className="w-12 h-12 object-contain" />,
-    color: "from-[#00758F]/10 to-[#00758F]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(0,117,143,0.2)]"
+    glowColor: "rgba(0, 117, 143, 0.25)"
   },
   {
     name: "Photoshop",
     icon: <img src="/icon/Adobe Photoshop.svg" alt="Photoshop" className="w-12 h-12 object-contain" />,
-    color: "from-[#31A8FF]/10 to-[#31A8FF]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(49,168,255,0.2)]"
+    glowColor: "rgba(49, 168, 255, 0.25)"
   },
   {
     name: "Illustrator",
     icon: <img src="/icon/Adobe Illustrator.svg" alt="Illustrator" className="w-12 h-12 object-contain" />,
-    color: "from-[#FF9A00]/10 to-[#FF9A00]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(255,154,0,0.2)]"
+    glowColor: "rgba(255, 154, 0, 0.25)"
   },
   {
     name: "Figma",
     icon: <img src="/icon/Figma.svg" alt="Figma" className="w-12 h-12 object-contain" />,
-    color: "from-[#FF9A00]/10 to-[#FF9A00]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(255,154,0,0.2)]"
+    glowColor: "rgba(242, 78, 30, 0.25)"
   },
   {
     name: "Supabase",
@@ -65,16 +56,15 @@ const technologies = [
         <path d="M64 45.3L42.7 66.7l21.3 21.3 21.3-21.3L64 45.3z" fill="white" />
       </svg>
     ),
-    color: "from-[#3ECF8E]/10 to-[#3ECF8E]/5",
-    glow: "group-hover:shadow-[0_0_30px_rgba(62,207,142,0.2)]"
+    glowColor: "rgba(62, 207, 142, 0.25)"
   }
 ];
 
 export const TechSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-blue-500/5 rounded-full blur-[180px] -z-10" />
+    <section className="py-24 relative overflow-hidden bg-[#020617]/50">
+      {/* Background decoration — contained within this section via overflow-hidden */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-blue-500/5 rounded-full blur-[180px] pointer-events-none" />
 
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
@@ -106,26 +96,32 @@ export const TechSection = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {technologies.map((tech, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -5 }}
-              className={`group relative p-8 rounded-3xl bg-gradient-to-br ${tech.color} border border-white/5 flex flex-col items-center justify-center gap-4 transition-all duration-300 ${tech.glow}`}
+              transition={{ duration: 0.5, delay: index * 0.04 }}
+              whileHover={{ scale: 1.15, y: -4 }}
+              className="group relative p-6 flex flex-col items-center justify-center gap-3 cursor-pointer"
             >
-              <div className="relative z-10 filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
+              {/* Background ambient radial glow on hover */}
+              <div 
+                className="absolute w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 blur-[28px] transition-all duration-500 pointer-events-none -z-10"
+                style={{
+                  background: `radial-gradient(circle, ${tech.glowColor} 0%, transparent 70%)`
+                }}
+              />
+
+              <div className="relative z-10 filter drop-shadow-md transition-all duration-300 group-hover:scale-105 group-hover:rotate-[2deg]">
                 {tech.icon}
               </div>
-              <span className="text-sm font-medium text-white/40 group-hover:text-white transition-colors">
+              
+              <span className="text-sm font-medium text-white/30 group-hover:text-white transition-colors duration-300 relative z-10">
                 {tech.name}
               </span>
-
-              {/* Subtle inner glow */}
-              <div className="absolute inset-0 rounded-3xl bg-white/0 group-hover:bg-white/[0.02] transition-colors" />
             </motion.div>
           ))}
         </div>

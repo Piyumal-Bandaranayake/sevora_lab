@@ -15,7 +15,7 @@ export default function Home() {
     "image": "https://www.sevoralab.studio/og-image.png",
     "@id": "https://www.sevoralab.studio/#organization",
     "url": "https://www.sevoralab.studio",
-    "telephone": "+94 77 123 4567",
+    "telephone": "+94 77 575 2149",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Colombo",
@@ -31,8 +31,10 @@ export default function Home() {
 
   return (
     <>
+      {/* JSON-LD structured data for SEO — rendered server-side only */}
       <script
         type="application/ld+json"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HomeClient />
