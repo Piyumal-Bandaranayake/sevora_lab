@@ -168,7 +168,7 @@ export default function HomeClient() {
   // Transform values for shrinking left header & expanding right cards container
   const headerLeft = useTransform(scrollYProgress, [0, 0.15], ["50%", "0%"]);
   const headerX = useTransform(scrollYProgress, [0, 0.15], ["-50%", "0%"]);
-  const headerTop = useTransform(scrollYProgress, [0, 0.15], ["50%", "6%"]);
+  const headerTop = useTransform(scrollYProgress, [0, 0.15], ["50%", "14%"]);
   const headerY = useTransform(scrollYProgress, [0, 0.15], ["-50%", "0%"]);
   const headerScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.35]);
   const paddingLeft = useTransform(scrollYProgress, [0, 0.15], ["100%", "0%"]);
@@ -183,6 +183,15 @@ export default function HomeClient() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-[#020617] py-20">
+          {/* Hero background image */}
+          <div
+            className="absolute inset-0 z-0 opacity-70 bg-cover bg-center pointer-events-none"
+            style={{
+              backgroundImage: "url('/images/background.jpg')",
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-[#020617]/40 to-[#020617] pointer-events-none" />
+
           {/* Background glow effects */}
           <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[120px]" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#6366F1]/5 rounded-full blur-[100px]" />

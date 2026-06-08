@@ -32,10 +32,18 @@ const values = [
 
 export default function AboutClient() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-white">
+    <div className="flex flex-col min-h-screen bg-[#020617] text-white relative overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.2] bg-fixed bg-cover bg-center pointer-events-none"
+        style={{ backgroundImage: "url('/service.jpg')" }}
+      />
+      {/* Dark overlay to blend in */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
+
       <Header />
       
-      <main className="flex-1 pt-32 pb-20">
+      <main className="flex-1 pt-32 pb-20 relative z-10">
 
         {/* --- Mission & Vision Section --- */}
         <section className="container mx-auto px-6 mb-40">
