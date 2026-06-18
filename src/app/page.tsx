@@ -2,6 +2,10 @@ import HomeClient from "./HomeClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  title: {
+    absolute: "Web Design Company Sri Lanka | Agency | Sevora Lab",
+  },
+  description: "Sevora Lab is a premier web design and development company in Sri Lanka. We build custom React/Next.js websites, ecommerce stores, and SEO strategies.",
   alternates: {
     canonical: "/",
   },
