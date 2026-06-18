@@ -35,7 +35,15 @@ export function ServiceCard({ title, description, Icon, image, features, classNa
         {/* The actual image */}
         <img
           src={image}
-          alt={title}
+          alt={
+            title === "Website Design" ? "Modern responsive UI UX website design mockup for Sri Lankan startups" :
+            title === "Web Development" ? "High performance React Next.js custom web development code editor interface" :
+            title === "SEO Optimization" ? "Technical SEO audit checklist and organic ranking performance dashboard" :
+            title === "Logo Design" ? "Custom brand identity and professional logo design concepts in Colombo" :
+            title === "Videography & Dronagraphy" ? "Cinematic aerial drone videography and 4K commercial production gear" :
+            title === "Social Media Post Design" ? "Creative social media post design templates and visual campaign assets" :
+            title
+          }
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0"
           onError={(e) => {
             e.currentTarget.style.opacity = '0';

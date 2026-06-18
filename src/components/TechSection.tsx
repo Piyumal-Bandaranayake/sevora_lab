@@ -68,15 +68,15 @@ export const TechSection = () => {
 
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-[#3B82F6] font-bold uppercase tracking-widest text-sm"
           >
             Our Tech Stack
-          </motion.h2>
-          <motion.h3
+          </motion.div>
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -84,7 +84,7 @@ export const TechSection = () => {
             className="text-4xl md:text-5xl font-bold text-white"
           >
             Powered by Modern Technologies
-          </motion.h3>
+          </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

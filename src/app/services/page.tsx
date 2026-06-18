@@ -2,8 +2,8 @@ import ServicesClient from "./ServicesClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Services | Custom Web Design & Development",
-  description: "Sevora Lab offers premium web design, custom web application development, SEO optimization, brand logo design, videography, and social media design services in Sri Lanka.",
+  title: "Services | Web Design, Development & SEO Sri Lanka",
+  description: "Explore Sevora Lab's professional web development, UI/UX design, custom e-commerce stores, brand logo design, and SEO services based in Sri Lanka.",
   keywords: [
     "web development services sri lanka",
     "custom web app development matale",
@@ -24,5 +24,53 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  return <ServicesClient />;
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does a typical project take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most projects take between 4 to 8 weeks depending on complexity."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer post-launch support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide various maintenance plans to keep your site updated and secure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you redesign my existing website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! We specialize in modernizing outdated websites for better performance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is your code SEO-friendly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we implement advanced SEO best practices in every line of code we write."
+        }
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <ServicesClient />
+    </>
+  );
 }

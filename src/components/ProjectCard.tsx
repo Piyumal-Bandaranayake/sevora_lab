@@ -13,9 +13,10 @@ interface ProjectCardProps {
   demoUrl?: string;
   className?: string;
   fullImage?: boolean;
+  alt?: string;
 }
 
-export function ProjectCard({ title, category, image, demoUrl, className, fullImage = false }: ProjectCardProps) {
+export function ProjectCard({ title, category, image, demoUrl, className, fullImage = false, alt }: ProjectCardProps) {
   const [isZoomed, setIsZoomed] = useState(false);
   const isLogo = category === "Logo";
 
@@ -46,7 +47,7 @@ export function ProjectCard({ title, category, image, demoUrl, className, fullIm
           <div className="relative w-full h-full overflow-hidden aspect-[4/3] md:aspect-[16/10]">
             <Image
               src={image}
-              alt={title || `${category} Project`}
+              alt={alt || title || `${category} Project`}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -94,7 +95,7 @@ export function ProjectCard({ title, category, image, demoUrl, className, fullIm
             <div className="relative aspect-video overflow-hidden">
               <Image
                 src={image}
-                alt={title || `${category} Project`}
+                alt={alt || title || `${category} Project`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -161,7 +162,7 @@ export function ProjectCard({ title, category, image, demoUrl, className, fullIm
             >
               <Image
                 src={image}
-                alt={title || `${category} Project`}
+                alt={alt || title || `${category} Project`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 className="object-contain"
