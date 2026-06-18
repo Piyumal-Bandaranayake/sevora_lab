@@ -29,6 +29,7 @@ export default function PortfolioClient() {
         <section className="container mx-auto px-6 mb-20">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">
+              <span className="sr-only">Sevora Lab Web Design & Web Development Portfolio Sri Lanka - </span>
               Our <span className="text-[#3B82F6] underline decoration-4 underline-offset-8">Digital Legacy</span>
             </h1>
             <p className="text-xl text-white/60 leading-relaxed">

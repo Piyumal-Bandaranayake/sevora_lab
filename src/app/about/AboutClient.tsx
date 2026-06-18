@@ -42,6 +42,23 @@ export default function AboutClient() {
       <Header />
       
       <main className="flex-1 pt-32 pb-20 relative z-10">
+        {/* Page Header */}
+        <section className="container mx-auto px-6 pt-10 mb-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
+          >
+            <span className="text-[#3B82F6] font-bold uppercase tracking-widest text-xs md:text-sm block">About Sevora Lab</span>
+            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+              We Are <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Sevora Lab</span>
+            </h1>
+            <p className="text-lg text-white/50 max-w-2xl mx-auto">
+              Crafting high-speed web experiences and cutting-edge software solutions in Sri Lanka.
+            </p>
+          </motion.div>
+        </section>
 
         {/* --- Mission & Vision Section --- */}
         <section className="container mx-auto px-6 mb-40">

@@ -88,6 +88,7 @@ export default function ContactClient() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-bold text-white mb-8"
           >
+            <span className="sr-only">Hire Web Designers & Developers Sri Lanka | Contact Sevora Lab - </span>
             Let's Start a <span className="text-[#3B82F6] underline decoration-4 underline-offset-8">Conversation</span>
           </motion.h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">

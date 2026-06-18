@@ -35,6 +35,7 @@ export default function ServicesClient() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-5xl md:text-7xl font-bold text-white mb-8"
           >
+            <span className="sr-only">Sevora Lab Web Design & SEO Services Sri Lanka - </span>
             Tailored <span className="text-[#3B82F6] underline decoration-4 underline-offset-8">Web Solutions</span>
           </motion.h1>
           <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
