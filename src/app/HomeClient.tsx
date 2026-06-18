@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  Zap,
   ArrowRight,
   Users,
   Trophy,
@@ -19,6 +18,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
 import { TechSection } from "@/components/TechSection";
+import { BGPattern } from "@/components/ui/bg-pattern";
 
 const Robot3D = dynamic(() => import("@/components/Robot3D"), {
   ssr: false,
@@ -35,22 +35,49 @@ const stats = [
   { label: "Years Experience", value: "2+", icon: Calendar },
 ];
 
+const heroContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: delay,
+    },
+  }),
+};
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 16,
+    },
+  },
+};
+
 export default function HomeClient() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+  const [isMounted, setIsMounted] = useState(false);
+  const [animationDelay, setAnimationDelay] = useState(4.2);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== "undefined") {
+      const hasRun = sessionStorage.getItem("preloader-run");
+      if (hasRun) {
+        setAnimationDelay(0.1);
+      }
+    }
+  }, []);
 
   // Portfolio slideshow states
   const [activeCategory, setActiveCategory] = useState<"All" | "Web Dev" | "Logo">("All");
   const [shuffledProjects, setShuffledProjects] = useState<typeof projects>([]);
-  const [portfolioIndex, setPortfolioIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
-  const [cardWidth, setCardWidth] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const gap = 24; // gap-6
+
+
 
   // Shuffle projects on mount to mix Web Dev and Logo randomly
   useEffect(() => {
@@ -70,111 +97,10 @@ export default function HomeClient() {
     return true;
   });
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(2);
-      } else {
-        setItemsPerPage(3);
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const updateWidth = () => {
-      if (carouselRef.current) {
-        const containerWidth = carouselRef.current.clientWidth;
-        const totalGapsWidth = gap * (itemsPerPage - 1);
-        const width = (containerWidth - totalGapsWidth) / itemsPerPage;
-        setCardWidth(width);
-      }
-    };
-    updateWidth();
-    const timer = setTimeout(updateWidth, 100);
-    window.addEventListener("resize", updateWidth);
-    return () => {
-      window.removeEventListener("resize", updateWidth);
-      clearTimeout(timer);
-    };
-  }, [itemsPerPage, filteredProjects]);
-
-  const maxIndex = Math.max(0, filteredProjects.length - itemsPerPage);
-
-  // Autoplay functionality: scrolls from left to right (next) automatically every 3 seconds
-  useEffect(() => {
-    if (isPaused || filteredProjects.length <= itemsPerPage) return;
-
-    const interval = setInterval(() => {
-      setPortfolioIndex((prev) => {
-        const next = prev + 1;
-        return next > maxIndex ? 0 : next;
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isPaused, filteredProjects.length, itemsPerPage, maxIndex]);
-
   // Reset index when changing category
   const handleCategoryChange = (category: "All" | "Web Dev" | "Logo") => {
     setActiveCategory(category);
-    setPortfolioIndex(0);
   };
-
-  const handlePrev = () => {
-    setPortfolioIndex(prev => Math.max(prev - 1, 0));
-    // Reset autoplay pause briefly on user interaction
-    setIsPaused(true);
-    const resumeTimer = setTimeout(() => setIsPaused(false), 5000);
-    return () => clearTimeout(resumeTimer);
-  };
-
-  const handleNext = () => {
-    setPortfolioIndex(prev => Math.min(prev + 1, maxIndex));
-    // Reset autoplay pause briefly on user interaction
-    setIsPaused(true);
-    const resumeTimer = setTimeout(() => setIsPaused(false), 5000);
-    return () => clearTimeout(resumeTimer);
-  };
-
-  const handleDragEnd = (event: any, info: any) => {
-    const offset = info.offset.x;
-    const velocity = info.velocity.x;
-
-    const currentX = -portfolioIndex * (cardWidth + gap) + offset;
-    const closestIndex = Math.round(-currentX / (cardWidth + gap));
-
-    let targetIndex = closestIndex;
-    if (Math.abs(velocity) > 200) {
-      if (velocity < 0) {
-        targetIndex = Math.min(portfolioIndex + 1, maxIndex);
-      } else {
-        targetIndex = Math.max(portfolioIndex - 1, 0);
-      }
-    } else {
-      targetIndex = Math.max(0, Math.min(closestIndex, maxIndex));
-    }
-
-    setPortfolioIndex(targetIndex);
-    // Pause briefly after dragging
-    setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
-  // Transform values for shrinking left header & expanding right cards container
-  const headerLeft = useTransform(scrollYProgress, [0, 0.15], ["50%", "0%"]);
-  const headerX = useTransform(scrollYProgress, [0, 0.15], ["-50%", "0%"]);
-  const headerTop = useTransform(scrollYProgress, [0, 0.15], ["50%", "14%"]);
-  const headerY = useTransform(scrollYProgress, [0, 0.15], ["-50%", "0%"]);
-  const headerScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.35]);
-  const paddingLeft = useTransform(scrollYProgress, [0, 0.15], ["100%", "0%"]);
-
-  // Horizontal scroll of cards (starts after layout transition is complete)
-  const x = useTransform(scrollYProgress, [0, 0.15, 1], ["0%", "0%", "-500%"]);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#020617]">
@@ -215,26 +141,31 @@ export default function HomeClient() {
 
               {/* Left Side – Text Content */}
               <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
+                variants={heroContainerVariants}
+                custom={animationDelay}
+                initial="hidden"
+                animate={isMounted ? "visible" : "hidden"}
                 className="space-y-6 text-center lg:text-left order-2 lg:order-1"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6] text-sm font-medium">
-                  <Zap size={14} />
-                  Building Digital Experiences
-                </div>
-
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                <motion.h1 
+                  variants={heroItemVariants}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+                >
                   Sevora
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] to-[#6366F1]"> Lab</span>
-                </h1>
+                </motion.h1>
 
-                <p className="text-lg md:text-xl text-white/60 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                <motion.p 
+                  variants={heroItemVariants}
+                  className="text-lg md:text-xl text-white/60 max-w-lg mx-auto lg:mx-0 leading-relaxed"
+                >
                   We craft high-performance web applications and stunning digital experiences that elevate your brand and drive real results.
-                </p>
+                </motion.p>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                <motion.div 
+                  variants={heroItemVariants}
+                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
+                >
                   <Link href="/contact">
                     <Button size="lg" variant="accent" className="min-w-[180px] group">
                       Start Project
@@ -246,17 +177,20 @@ export default function HomeClient() {
                       View Work
                     </Button>
                   </Link>
-                </div>
+                </motion.div>
 
                 {/* Quick stats row */}
-                <div className="flex gap-8 justify-center lg:justify-start pt-4">
+                <motion.div 
+                  variants={heroItemVariants}
+                  className="flex gap-8 justify-center lg:justify-start pt-4"
+                >
                   {stats.map((stat, i) => (
                     <div key={i} className="text-center lg:text-left">
                       <div className="text-2xl font-bold text-white">{stat.value}</div>
                       <div className="text-xs text-white/40 uppercase tracking-wider">{stat.label}</div>
                     </div>
                   ))}
-                </div>
+                </motion.div>
               </motion.div>
 
               {/* Right Side – 3D Robot */}
@@ -274,98 +208,35 @@ export default function HomeClient() {
         </section>
 
 
-        {/* Mobile Services Teaser */}
-        <section className="py-20 block md:hidden relative overflow-hidden bg-[#020617]">
-          {/* Background image */}
-          <div
-            className="absolute inset-0 z-0 opacity-[0.2] bg-cover bg-center"
-            style={{ backgroundImage: "url('/service.jpg')" }}
-          />
+        {/* Our Expertise Section */}
+        <section className="py-24 relative overflow-hidden bg-[#020617] isolate">
+          {/* Simple Background Design: Dot Matrix Pattern */}
+           <BGPattern variant="dots" fill="rgba(255,255,255,0.08)" size={32} mask="fade-edges" />
 
           {/* Overlays */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
-            <div className="absolute inset-0 bg-[#020617]/70" />
-          </div>
+          <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#020617] via-transparent to-[#020617] pointer-events-none" />
+          <div className="absolute inset-0 z-[-2] bg-[#020617]/50 pointer-events-none" />
 
-          <div className="container mx-auto px-6 relative z-10 space-y-8">
-            <div className="space-y-4">
-              <span className="text-[#3B82F6] font-bold uppercase tracking-widest text-xs block">Our Expertise</span>
-              <h3 className="text-4xl font-black uppercase tracking-tight text-white leading-none">
-                OUR <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
-                  EXPERTISE
-                </span>
-              </h3>
-              <p className="text-sm text-white/60">
-                We specialize in creating bespoke web experiences that drive growth and deliver results. Swipe to explore our key capabilities.
+          {/* Ambient light glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[150px] pointer-events-none z-0" />
+
+          <div className="container mx-auto px-6 relative z-10">
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+              <span className="text-[#3B82F6] font-bold uppercase tracking-widest text-xs md:text-sm block animate-pulse">Our Expertise</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+                Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">Expertise</span>
+              </h2>
+              <p className="text-base md:text-lg text-white/60 max-w-xl mx-auto">
+                We specialize in creating bespoke web experiences and digital assets that drive growth and deliver outstanding results.
               </p>
             </div>
 
-            {/* Horizontal Swipe Container */}
-            <div
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden -mx-6 px-6 pb-6"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
+            {/* Grid Layout containing cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
               {services.map((service, index) => (
-                <div key={index} className="snap-center shrink-0 w-[85vw] sm:w-[420px] h-[360px]">
-                  <ExpertiseCard index={index} {...service} />
-                </div>
+                <ExpertiseCard key={index} index={index} {...service} />
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Desktop Services Teaser */}
-        <section ref={sectionRef} className="hidden md:block relative h-[350vh] bg-[#020617] overflow-visible">
-          {/* Background image with fixed attachment */}
-          <div
-            className="absolute inset-0 z-0 opacity-[0.3] bg-fixed bg-cover bg-center"
-            style={{ backgroundImage: "url('/service.jpg')" }}
-          />
-
-          {/* Overlays */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
-            <div className="absolute inset-0 bg-[#020617]/60" />
-          </div>
-
-          <div className="sticky top-0 h-screen flex items-center overflow-hidden z-10">
-            {/* Background decoration */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[#3B82F6]/5 rounded-full blur-[180px] z-0 pointer-events-none" />
-
-            <div className="container mx-auto px-6 relative z-10 w-full h-full flex items-center">
-              {/* Left Column: Animated Title (Centered initially, pins to top-left on scroll) */}
-              <motion.div
-                style={{ left: headerLeft, x: headerX, top: headerTop, y: headerY, scale: headerScale, transformOrigin: "left top" }}
-                className="absolute z-20 w-max pointer-events-none flex flex-col items-center text-center"
-              >
-                <div className="space-y-4 flex flex-col items-center">
-                  <span className="text-[#3B82F6] font-bold uppercase tracking-widest text-sm block animate-pulse">Our Expertise</span>
-                  <h3 className="text-5xl lg:text-7xl xl:text-9xl font-black uppercase tracking-tight text-white leading-none whitespace-nowrap">
-                    Our Expertise
-                  </h3>
-                </div>
-              </motion.div>
-
-              {/* Right Column: Horizontal Scrolling Cards (Expands to full width) */}
-              <motion.div
-                style={{ paddingLeft }}
-                className="w-full overflow-hidden py-4"
-              >
-                <motion.div
-                  style={{ x }}
-                  className="flex"
-                >
-                  {services.map((service, index) => (
-                    <div key={index} className="w-full shrink-0 flex justify-center items-center h-[420px] px-4 md:px-12">
-                      <div className="w-full max-w-[680px] h-[340px] md:h-[350px]">
-                        <ExpertiseCard index={index} {...service} />
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
-              </motion.div>
             </div>
           </div>
         </section>
@@ -374,9 +245,26 @@ export default function HomeClient() {
         <TechSection />
 
         {/* Portfolio Preview */}
-        <section className="py-24 bg-[#0A1128]/40 border-y border-white/5 relative overflow-hidden">
+        <section className="py-24 bg-[#0A1128]/40 border-y border-white/5 relative overflow-hidden isolate">
           {/* Subtle background glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+          
+          {/* Simple Background Design: Grid Pattern */}
+          <BGPattern variant="grid" fill="rgba(255,255,255,0.06)" size={48} mask="fade-edges" />
+
+          {/* Custom style for smooth infinite marquee */}
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes marquee-portfolio {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-marquee-portfolio {
+              animation: marquee-portfolio var(--marquee-duration, 25s) linear infinite;
+            }
+            .animate-marquee-portfolio:hover {
+              animation-play-state: paused;
+            }
+          `}} />
 
           <div className="container mx-auto px-6 relative z-10">
             {/* Header: Title and controls */}
@@ -412,33 +300,25 @@ export default function HomeClient() {
             </div>
 
             {/* Slideshow Carousel Viewport */}
-            <div
-              ref={carouselRef}
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              className="w-full overflow-hidden py-4 cursor-grab active:cursor-grabbing"
-            >
-              <motion.div
-                drag="x"
-                dragConstraints={{
-                  left: -maxIndex * (cardWidth + gap),
-                  right: 0
-                }}
-                onDragEnd={handleDragEnd}
-                animate={{ x: -portfolioIndex * (cardWidth + gap) }}
-                transition={{ type: "spring", stiffness: 220, damping: 26 }}
-                className="flex gap-6 w-max"
+            <div className="w-full overflow-hidden py-4 select-none relative">
+              {/* Fade overlays at ends for a premium look */}
+              <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#020617] via-[#020617]/40 to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#020617] via-[#020617]/40 to-transparent z-10 pointer-events-none" />
+
+              <div 
+                className="flex gap-6 w-max animate-marquee-portfolio"
+                style={{ "--marquee-duration": `${filteredProjects.length * 3.5}s` } as React.CSSProperties}
               >
-                {filteredProjects.map((project, index) => (
+                {/* Render the projects twice to support seamless looping */}
+                {[...filteredProjects, ...filteredProjects].map((project, index) => (
                   <div
                     key={index}
-                    style={{ width: cardWidth || 380 }}
-                    className="shrink-0"
+                    className="w-[280px] sm:w-[360px] md:w-[420px] shrink-0"
                   >
                     <ProjectCard {...project} fullImage />
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             <div className="flex justify-center mt-16">
@@ -453,7 +333,7 @@ export default function HomeClient() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-32 relative overflow-hidden">
+        <section className="py-32 relative overflow-hidden isolate">
           <div className="container mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -461,11 +341,8 @@ export default function HomeClient() {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-[#0A1128] to-[#020617] border border-white/10 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl"
             >
-              {/* Background image with fixed attachment inside the box */}
-              <div
-                className="absolute inset-0 z-0 opacity-[0.4] bg-fixed bg-cover bg-center"
-                style={{ backgroundImage: "url('/cta-bg.webp')" }}
-              />
+              {/* Simple Background Design: Diagonal Lines Pattern */}
+              <BGPattern variant="diagonal-stripes" fill="rgba(255,255,255,0.05)" size={24} mask="fade-edges" />
 
               {/* Overlays inside the box */}
               <div className="absolute inset-0 z-0 pointer-events-none">

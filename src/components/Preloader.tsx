@@ -7,11 +7,22 @@ export function Preloader() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hasRun = sessionStorage.getItem("preloader-run");
+      if (hasRun) {
+        setLoading(false);
+        return;
+      }
+    }
+
     // Disable body scrolling during loading
     document.body.style.overflow = "hidden";
 
     const timer = setTimeout(() => {
       setLoading(false);
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("preloader-run", "true");
+      }
       document.body.style.overflow = "unset";
     }, 4000);
 
@@ -20,6 +31,7 @@ export function Preloader() {
       document.body.style.overflow = "unset";
     };
   }, []);
+
 
   return (
     <AnimatePresence>

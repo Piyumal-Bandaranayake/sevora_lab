@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ChevronDown } from "lucide-react";
 import { services } from "@/data/services";
+import { BGPattern } from "@/components/ui/bg-pattern";
 
 const faqs = [
   { q: "How long does a typical project take?", a: "Most projects take between 4 to 8 weeks depending on complexity." },
@@ -19,14 +20,11 @@ export default function ServicesClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 z-0 opacity-[0.2] bg-fixed bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: "url('/service.jpg')" }}
-      />
+    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden isolate">
+      {/* Background design: grid */}
+      <BGPattern variant="grid" fill="rgba(255,255,255,0.06)" size={48} mask="fade-edges" />
       {/* Dark overlay to blend in */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
+      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
 
       <Header />
       

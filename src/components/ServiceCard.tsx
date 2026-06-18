@@ -2,38 +2,71 @@
 
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ServiceCardProps {
   title: string;
   description: string;
   Icon: LucideIcon;
+  image: string;
+  features?: string[];
   className?: string;
 }
 
-export function ServiceCard({ title, description, Icon, className }: ServiceCardProps) {
+export function ServiceCard({ title, description, Icon, image, features, className }: ServiceCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -10 }}
+      whileHover={{ y: -8 }}
       className={cn(
-        "glass p-8 rounded-3xl flex flex-col items-start gap-4 transition-all hover:shadow-2xl hover:border-accent/40",
+        "glass p-6 rounded-3xl flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-accent/40 h-full",
         className
       )}
     >
-      <div className="p-4 rounded-2xl bg-white/5 text-accent shadow-inner">
-        <Icon size={32} />
+      {/* Image / Placeholder Space */}
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-gradient-to-br from-slate-900 via-blue-950/20 to-slate-900 border border-white/5 group-hover:border-accent/30 transition-all duration-300">
+        {/* Visual background placeholder grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px]" />
+        
+        {/* Interactive placeholder indicator */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30 group-hover:opacity-50 transition-opacity">
+          <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">Image Space</span>
+        </div>
+
+        {/* The actual image */}
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0"
+          onError={(e) => {
+            e.currentTarget.style.opacity = '0';
+          }}
+        />
+
+        {/* Floating Service Icon Badge */}
+        <div className="absolute bottom-4 left-4 p-3 rounded-xl bg-slate-950/80 backdrop-blur-md text-accent border border-white/10 shadow-lg z-10 transition-transform duration-300 group-hover:scale-105">
+          <Icon size={24} />
+        </div>
       </div>
-      <h3 className="text-xl font-bold text-white mt-2">{title}</h3>
-      <p className="text-foreground/80 leading-relaxed">{description}</p>
-      <Link
-        href="/services"
-        className="flex items-center gap-2 text-sm font-bold text-accent group mt-4 transition-colors hover:text-white"
-      >
-        Learn More
-        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-      </Link>
+
+      <h3 className="text-xl font-bold text-white mt-2 mb-2 tracking-tight">{title}</h3>
+      <p className="text-white/60 leading-relaxed text-sm font-medium mb-5">{description}</p>
+
+      {/* Small Keywords / Features tags */}
+      {features && features.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mt-auto">
+          {features.map((feature, idx) => (
+            <span
+              key={idx}
+              className="text-[10px] font-semibold text-accent bg-accent/5 border border-accent/15 rounded-full px-2.5 py-1 tracking-wide"
+            >
+              {feature}
+            </span>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 }
+
+
+
