@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Button } from "@/components/ui/Button";
 import { projects, categories } from "@/data/portfolio";
+import { BGPattern } from "@/components/ui/bg-pattern";
 
 export default function PortfolioClient() {
   const [filter, setFilter] = useState("All");
@@ -16,14 +17,11 @@ export default function PortfolioClient() {
     : projects.filter(p => p.category.trim().toLowerCase() === filter.trim().toLowerCase());
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 z-0 opacity-[0.2] bg-fixed bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: "url('/service.jpg')" }}
-      />
+    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden isolate">
+      {/* Background design: grid */}
+      <BGPattern variant="grid" fill="rgba(255,255,255,0.06)" size={48} mask="fade-edges" />
       {/* Dark overlay to blend in */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
+      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
 
       <Header />
       

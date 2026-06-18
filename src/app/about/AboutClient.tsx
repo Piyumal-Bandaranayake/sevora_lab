@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BGPattern } from "@/components/ui/bg-pattern";
 import { 
   Zap, 
   ShieldCheck, 
@@ -32,14 +33,11 @@ const values = [
 
 export default function AboutClient() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-white relative overflow-hidden">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 z-0 opacity-[0.2] bg-fixed bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: "url('/service.jpg')" }}
-      />
+    <div className="flex flex-col min-h-screen bg-[#020617] text-white relative overflow-hidden isolate">
+      {/* Background design: dots */}
+      <BGPattern variant="dots" fill="rgba(255,255,255,0.08)" size={32} mask="fade-edges" />
       {/* Dark overlay to blend in */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
+      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
 
       <Header />
       
