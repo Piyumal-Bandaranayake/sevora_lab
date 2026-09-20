@@ -19,6 +19,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
 import { BGPattern } from "@/components/ui/bg-pattern";
+import { IdeaToProductSection } from "@/components/IdeaToProductSection";
 
 const LightRays = dynamic(() => import("@/components/LightRays"), {
   ssr: false,
@@ -193,6 +194,8 @@ export default function HomeClient() {
           </motion.div>
         </section>
 
+        {/* Idea to Digital Product Section */}
+        <IdeaToProductSection />
 
         {/* Our Expertise Section */}
         <section className="py-24 relative overflow-hidden bg-[#071A2B] isolate">
