@@ -5,7 +5,7 @@ export interface PortfolioProject {
   demoUrl?: string;
 }
 
-export const categories = ["Web Dev", "Logo", "Poster"];
+export const categories = ["Web Dev", "Logo", "Poster", "Videography"];
 
 export const projects: PortfolioProject[] = [
   {
