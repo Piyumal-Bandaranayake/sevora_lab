@@ -3,7 +3,6 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Metadata } from "next";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { Preloader } from "@/components/Preloader";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -91,7 +90,6 @@ export default function RootLayout({
         className={`${outfit.variable} ${inter.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
       >
         <Providers>
-          <Preloader />
           {children}
           <WhatsAppButton />
         </Providers>

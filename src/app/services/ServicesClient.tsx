@@ -20,11 +20,11 @@ export default function ServicesClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden isolate">
+    <div className="flex flex-col min-h-screen bg-[#071A2B] relative overflow-hidden isolate">
       {/* Background design: grid */}
       <BGPattern variant="grid" fill="rgba(255,255,255,0.06)" size={48} mask="fade-edges" />
       {/* Dark overlay to blend in */}
-      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
+      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#071A2B]/50 via-transparent to-[#071A2B] pointer-events-none" />
 
       <Header />
       
@@ -35,9 +35,9 @@ export default function ServicesClient() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-5xl md:text-7xl font-bold text-white mb-8"
           >
-            Tailored <span className="text-[#3B82F6] underline decoration-4 underline-offset-8">Web Solutions</span>
+            Tailored <span className="text-[#1677FF] underline decoration-4 underline-offset-8">Web Solutions</span>
           </motion.h1>
-          <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-[#EAF4FF]/70 max-w-3xl mx-auto leading-relaxed">
             We offer a comprehensive suite of digital services designed to elevate your brand and exceed your business objectives.
           </p>
         </section>
@@ -56,13 +56,13 @@ export default function ServicesClient() {
           <h2 className="text-4xl font-bold text-center text-white mb-16">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <div key={i} className="border border-white/5 rounded-2xl overflow-hidden glass transition-all hover:border-[#3B82F6]/20">
+              <div key={i} className="border border-white/5 rounded-2xl overflow-hidden glass transition-all hover:border-[#1677FF]/20">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full p-6 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                 >
                   <span className="font-bold text-lg text-white">{faq.q}</span>
-                  <ChevronDown className={`text-[#3B82F6] transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`text-[#1677FF] transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
                   {openFaq === i && (
@@ -70,7 +70,7 @@ export default function ServicesClient() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="px-6 pb-6 text-white/60 leading-relaxed"
+                      className="px-6 pb-6 text-[#EAF4FF]/70 leading-relaxed"
                     >
                       {faq.a}
                     </motion.div>

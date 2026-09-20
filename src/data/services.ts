@@ -1,4 +1,4 @@
-import { LucideIcon, Layout, Code2, Search, Palette, Camera, Image } from "lucide-react";
+import { LucideIcon, Layout, Code2, Search, Palette } from "lucide-react";
 
 export interface Service {
   title: string;
@@ -55,30 +55,6 @@ export const services: Service[] = [
       "Vector Formats & Full Ownership Assets",
       "Comprehensive Brand Style Guides",
       "Social Media & Stationery Kits"
-    ]
-  },
-  {
-    title: "Videography & Dronagraphy",
-    description: "High-quality video production and drone footage to showcase your projects from stunning angles.",
-    Icon: Camera,
-    image: "/images/services/videography.png",
-    features: [
-      "4K Cinematic Video Production",
-      "Aerial Drone Video & Photography",
-      "Professional Editing & Color Grading",
-      "Custom Sound Design & Voiceovers"
-    ]
-  },
-  {
-    title: "Social Media Post Design",
-    description: "Creative and engaging social media posts designed to capture attention and grow your audience.",
-    Icon: Image,
-    image: "/images/services/social-media.png",
-    features: [
-      "Custom-Branded Graphic Templates",
-      "Campaign Assets & Content Planning",
-      "Story & Video Reel Assets",
-      "Engagement-Driven Copywriting"
     ]
   },
 ];

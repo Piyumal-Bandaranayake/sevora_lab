@@ -16,6 +16,7 @@ const nextConfig = {
     ],
   },
   turbopack: {
+    root: import.meta.dirname,
     resolveAlias: {
       canvas: "./empty-module.js",
     },

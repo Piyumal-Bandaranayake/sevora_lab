@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-[#020617] text-white/50 py-6 px-6 border-t border-white/5 text-xs font-medium relative overflow-hidden">
+    <footer className="bg-[#071A2B] text-white/50 py-6 px-6 border-t border-white/5 text-xs font-medium relative overflow-hidden">
 
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
         {/* Left Side: Logo */}
@@ -13,7 +13,7 @@ export function Footer() {
             className="h-6 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <span className="text-base font-bold tracking-wider text-white uppercase">
-            Sevora<span className="text-[#3B82F6]">Lab</span>
+            Sevora<span className="text-[#1677FF]">Lab</span>
           </span>
         </Link>
 
