@@ -110,40 +110,27 @@ export default function AboutClient() {
           <div className="relative rounded-[4rem] overflow-hidden bg-gradient-to-br from-[#0B2742] to-[#071A2B] p-12 md:p-24 border border-white/10">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1677FF]/5 rounded-full blur-[150px]" />
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-              <div className="space-y-8">
-                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#1677FF]/10 border border-[#1677FF]/20 text-[#1677FF] text-sm font-semibold">
-                  <Globe2 size={16} />
-                  Global Standards, Local Expertise
-                </div>
-                <h2 className="text-4xl md:text-5xl font-bold leading-tight">Bridging Excellence <br /> Across Borders</h2>
-                <p className="text-lg text-[#EAF4FF]/70 leading-relaxed">
-                  Headquartered in the vibrant tech landscape of Sri Lanka, Sevora Lab leverages a talent pool of elite engineers to build world-class digital products. This dedication to precision allows us to offer premium quality at optimized efficiency for businesses globally.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 text-white/80">
-                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">✓</div>
-                    <span>Adhering to the highest global security & quality standards</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-white/80">
-                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">✓</div>
-                    <span>Real-time collaboration across time zones</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-white/80">
-                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">✓</div>
-                    <span>Multidisciplinary team of developers, designers, and strategists</span>
-                  </div>
-                </div>
+            <div className="max-w-3xl space-y-8 relative z-10">
+              <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#1677FF]/10 border border-[#1677FF]/20 text-[#1677FF] text-sm font-semibold">
+                <Globe2 size={16} />
+                Global Standards, Local Expertise
               </div>
-              
-              <div className="relative">
-                <div className="aspect-square bg-white/[0.03] rounded-full border border-white/10 flex items-center justify-center relative">
-                  <div className="w-3/4 h-3/4 bg-[#1677FF]/5 rounded-full blur-[80px] absolute animate-pulse" />
-                  <div className="text-center space-y-2 relative">
-                     <Globe2 size={80} className="text-[#1677FF] mx-auto mb-4 opacity-20" />
-                     <div className="text-4xl font-bold">15+</div>
-                     <div className="text-white/40 uppercase tracking-widest text-sm">Dedicated Specialists</div>
-                  </div>
+              <h2 className="text-4xl md:text-5xl font-bold leading-tight">Bridging Excellence <br /> Across Borders</h2>
+              <p className="text-lg text-[#EAF4FF]/70 leading-relaxed">
+                Headquartered in the vibrant tech landscape of Sri Lanka, Sevora Lab leverages a talent pool of elite engineers to build world-class digital products. This dedication to precision allows us to offer premium quality at optimized efficiency for businesses globally.
+              </p>
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center gap-4 text-white/80">
+                  <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xs font-bold">✓</div>
+                  <span>Adhering to the highest global security & quality standards</span>
+                </div>
+                <div className="flex items-center gap-4 text-white/80">
+                  <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xs font-bold">✓</div>
+                  <span>Real-time collaboration across time zones</span>
+                </div>
+                <div className="flex items-center gap-4 text-white/80">
+                  <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xs font-bold">✓</div>
+                  <span>Multidisciplinary team of developers, designers, and strategists</span>
                 </div>
               </div>
             </div>

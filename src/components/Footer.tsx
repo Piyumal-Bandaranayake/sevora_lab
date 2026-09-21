@@ -22,6 +22,9 @@ export function Footer() {
           <Link href="/" className="text-white/40 hover:text-white uppercase tracking-widest font-bold text-[10px] transition-colors">
             Home
           </Link>
+          <Link href="/services" className="text-white/40 hover:text-white uppercase tracking-widest font-bold text-[10px] transition-colors">
+            Services
+          </Link>
           <Link href="/portfolio" className="text-white/40 hover:text-white uppercase tracking-widest font-bold text-[10px] transition-colors">
             Portfolio
           </Link>

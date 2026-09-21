@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "Services", href: "/#services" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
@@ -27,8 +28,22 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      const targetId = href.replace("/#", "");
+      if (pathname === "/") {
+        e.preventDefault();
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
+
   return (
     <header
+      suppressHydrationWarning
       className={cn(
         "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ease-in-out",
         scrolled
@@ -62,36 +77,40 @@ export function Header() {
           className="hidden md:flex items-center gap-6"
           onMouseLeave={() => setHoveredPath(null)}
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onMouseEnter={() => setHoveredPath(link.href)}
-              className={cn(
-                "text-sm font-medium transition-all duration-300 relative py-2 px-4 rounded-full",
-                pathname === link.href ? "text-[#1677FF] font-semibold" : "text-white/80 hover:text-white"
-              )}
-            >
-              <span className="relative z-10">{link.name}</span>
-              {hoveredPath === link.href && (
-                <motion.div
-                  layoutId="hover-pill"
-                  className="absolute inset-0 bg-white/[0.04] border border-white/5 rounded-full"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                />
-              )}
-              {pathname === link.href && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#1677FF]"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href || (link.href === "/#services" && pathname === "/services");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                onMouseEnter={() => setHoveredPath(link.href)}
+                className={cn(
+                  "text-sm font-medium transition-all duration-300 relative py-2 px-4 rounded-full",
+                  isActive ? "text-[#1677FF] font-semibold" : "text-white/80 hover:text-white"
+                )}
+              >
+                <span className="relative z-10">{link.name}</span>
+                {hoveredPath === link.href && (
+                  <motion.div
+                    layoutId="hover-pill"
+                    className="absolute inset-0 bg-white/[0.04] border border-white/5 rounded-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+                {isActive && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#1677FF]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
           <Link href="/contact" className="ml-2">
             <Button variant="accent" size="sm" className="group relative overflow-hidden">
               <span className="relative z-10 flex items-center gap-1">
@@ -125,23 +144,30 @@ export function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden absolute left-0 top-full w-full bg-[#071A2B]/95 backdrop-blur-lg shadow-2xl px-6 py-8 flex flex-col gap-6 rounded-b-3xl border-b border-white/10 transition-all duration-300"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={cn(
-                  "text-lg font-medium",
-                  pathname === link.href ? "text-[#1677FF]" : "text-white/80 transition-colors hover:text-[#1677FF]"
-                )}
-              >
-
-                {link.name}
-              </Link>
-            ))}
-            <Button variant="accent" className="w-full">
-              Start Project
-            </Button>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href === "/#services" && pathname === "/services");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    setIsOpen(false);
+                    handleNavClick(e, link.href);
+                  }}
+                  className={cn(
+                    "text-lg font-medium",
+                    isActive ? "text-[#1677FF]" : "text-white/80 transition-colors hover:text-[#1677FF]"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            <Link href="/contact" onClick={() => setIsOpen(false)}>
+              <Button variant="accent" className="w-full">
+                Start Project
+              </Button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

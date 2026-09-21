@@ -1,4 +1,4 @@
-import { LucideIcon, Layout, Code2, Search, Palette } from "lucide-react";
+import { LucideIcon, Layout, Code2, Search, Palette, Cpu } from "lucide-react";
 
 export interface Service {
   title: string;
@@ -57,5 +57,16 @@ export const services: Service[] = [
       "Social Media & Stationery Kits"
     ]
   },
+  {
+    title: "Automation Development",
+    description: "Streamline operations and eliminate repetitive tasks with custom automated workflows, API integrations, and smart AI tools.",
+    Icon: Cpu,
+    image: "/images/services/automation.png",
+    features: [
+      "Custom API & Workflow Automations",
+      "n8n & Zapier Process Pipelines",
+      "AI Chatbot & Assistant Integration",
+      "Data Sync & Automated Lead Routing"
+    ]
+  }
 ];
-

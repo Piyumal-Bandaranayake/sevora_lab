@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -57,16 +57,10 @@ const heroItemVariants = {
 
 export default function HomeClient() {
   const [isMounted, setIsMounted] = useState(false);
-  const [animationDelay, setAnimationDelay] = useState(4.2);
+  const [animationDelay, setAnimationDelay] = useState(0.1);
 
   useEffect(() => {
     setIsMounted(true);
-    if (typeof window !== "undefined") {
-      const hasRun = sessionStorage.getItem("preloader-run");
-      if (hasRun) {
-        setAnimationDelay(0.1);
-      }
-    }
   }, []);
 
   // Portfolio slideshow states
@@ -99,7 +93,7 @@ export default function HomeClient() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#071A2B]">
+    <div className="flex flex-col min-h-screen bg-[#071A2B]" suppressHydrationWarning>
       <Header />
 
       <main className="flex-1">
@@ -197,8 +191,8 @@ export default function HomeClient() {
         {/* Idea to Digital Product Section */}
         <IdeaToProductSection />
 
-        {/* Our Expertise Section */}
-        <section className="py-24 relative overflow-hidden bg-[#071A2B] isolate">
+        {/* Our Expertise / Services Section */}
+        <section id="services" className="py-24 relative overflow-hidden bg-[#071A2B] isolate scroll-mt-28">
           {/* Simple Background Design: Dot Matrix Pattern */}
            <BGPattern variant="dots" fill="rgba(255,255,255,0.08)" size={32} mask="fade-edges" />
 
@@ -238,20 +232,6 @@ export default function HomeClient() {
           {/* Simple Background Design: Grid Pattern */}
           <BGPattern variant="grid" fill="rgba(255,255,255,0.06)" size={48} mask="fade-edges" />
 
-          {/* Custom style for smooth infinite marquee */}
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes marquee-portfolio {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .animate-marquee-portfolio {
-              animation: marquee-portfolio var(--marquee-duration, 25s) linear infinite;
-            }
-            .animate-marquee-portfolio:hover {
-              animation-play-state: paused;
-            }
-          `}} />
-
           <div className="container mx-auto px-6 relative z-10">
             {/* Header: Title and controls */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
@@ -285,26 +265,23 @@ export default function HomeClient() {
               </div>
             </div>
 
-            {/* Slideshow Carousel Viewport */}
-            <div className="w-full overflow-hidden py-4 select-none relative">
-              {/* Fade overlays at ends for a premium look */}
-              <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#071A2B] via-[#071A2B]/40 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#071A2B] via-[#071A2B]/40 to-transparent z-10 pointer-events-none" />
-
-              <div 
-                className="flex gap-6 w-max animate-marquee-portfolio"
-                style={{ "--marquee-duration": `${filteredProjects.length * 3.5}s` } as React.CSSProperties}
-              >
-                {/* Render the projects twice to support seamless looping */}
-                {[...filteredProjects, ...filteredProjects].map((project, index) => (
-                  <div
-                    key={index}
-                    className="w-[280px] sm:w-[360px] md:w-[420px] shrink-0"
+            {/* Grid Card View */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.slice(0, 6).map((project, index) => (
+                  <motion.div
+                    key={`${project.image}-${index}`}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="h-full"
                   >
-                    <ProjectCard {...project} fullImage />
-                  </div>
+                    <ProjectCard {...project} fullImage className="h-full" />
+                  </motion.div>
                 ))}
-              </div>
+              </AnimatePresence>
             </div>
 
             <div className="flex justify-center mt-16">
