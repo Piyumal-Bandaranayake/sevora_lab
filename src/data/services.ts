@@ -1,4 +1,4 @@
-import { LucideIcon, Layout, Code2, Search, Palette, Cpu } from "lucide-react";
+import { LucideIcon, Layout, Code2, Search, Palette, Camera, Image } from "lucide-react";
 
 export interface Service {
   title: string;
@@ -58,15 +58,28 @@ export const services: Service[] = [
     ]
   },
   {
-    title: "Automation Development",
-    description: "Streamline operations and eliminate repetitive tasks with custom automated workflows, API integrations, and smart AI tools.",
-    Icon: Cpu,
-    image: "/images/services/automation.png",
+    title: "Videography & Dronagraphy",
+    description: "High-quality video production and drone footage to showcase your projects from stunning angles.",
+    Icon: Camera,
+    image: "/images/services/videography.png",
     features: [
-      "Custom API & Workflow Automations",
-      "n8n & Zapier Process Pipelines",
-      "AI Chatbot & Assistant Integration",
-      "Data Sync & Automated Lead Routing"
+      "4K Cinematic Video Production",
+      "Aerial Drone Video & Photography",
+      "Professional Editing & Color Grading",
+      "Custom Sound Design & Voiceovers"
     ]
-  }
+  },
+  {
+    title: "Social Media Post Design",
+    description: "Creative and engaging social media posts designed to capture attention and grow your audience.",
+    Icon: Image,
+    image: "/images/services/social-media.png",
+    features: [
+      "Custom-Branded Graphic Templates",
+      "Campaign Assets & Content Planning",
+      "Story & Video Reel Assets",
+      "Engagement-Driven Copywriting"
+    ]
+  },
 ];
+

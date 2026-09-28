@@ -2,8 +2,8 @@ import PortfolioClient from "./PortfolioClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Work & Portfolio",
-  description: "Browse the portfolio of Sevora Lab. Discover our custom web development projects, modern logo designs, professional posters, and high-quality videography projects in Sri Lanka.",
+  title: "Portfolio | Website Design & Web Development",
+  description: "Browse Sevora Lab's portfolio of custom websites, online shops, and brand designs created for startups and small businesses in Sri Lanka.",
   keywords: [
     "sevora lab portfolio",
     "sevora lab projects",

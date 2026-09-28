@@ -42,10 +42,10 @@ export function Preloader() {
             opacity: 0,
             transition: { duration: 0.8, ease: "easeInOut" }
           }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#071A2B] select-none pointer-events-auto"
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#020617] select-none pointer-events-auto"
         >
           {/* Background decoration */}
-          <div className="absolute w-[450px] h-[450px] bg-[#1677FF]/6 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute w-[450px] h-[450px] bg-[#3B82F6]/5 rounded-full blur-[120px] pointer-events-none" />
 
           <div className="flex flex-col items-center space-y-8 z-10">
             {/* Logo container with float and zoom entrance animations */}
@@ -70,7 +70,7 @@ export function Preloader() {
               <img
                 src="/images/Clogo.png"
                 alt="Sevora Lab Logo"
-                className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(22,119,255,0.35)]"
+                className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(59,130,246,0.3)]"
               />
             </motion.div>
 
@@ -82,7 +82,7 @@ export function Preloader() {
               className="text-center"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-white">
-                Sevora<span className="text-[#1677FF]">Lab</span>
+                Sevora<span className="text-[#3B82F6]">Lab</span>
               </h2>
               <p className="text-xs md:text-sm text-white/40 uppercase tracking-[0.3em] mt-3 font-semibold">
                 Digital Experiences
@@ -99,7 +99,7 @@ export function Preloader() {
                   duration: 1.6, 
                   ease: "easeInOut" 
                 }}
-                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-[#1677FF] to-transparent"
+                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-[#3B82F6] to-transparent"
               />
             </div>
           </div>

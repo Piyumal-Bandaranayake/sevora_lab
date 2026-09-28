@@ -2,8 +2,8 @@ import ContactClient from "./ContactClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Get a Free Quote",
-  description: "Get in touch with Sevora Lab. Discuss your next project, request a free quote, or consult about our software development, design, and branding solutions in Sri Lanka.",
+  title: "Contact Us | Hire Web Designers in Sri Lanka",
+  description: "Ready to start your project? Get a free quote for website design, development, or SEO services from Sevora Lab in Sri Lanka. Contact us today.",
   keywords: [
     "contact sevora lab",
     "sevora lab phone number",

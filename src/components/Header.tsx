@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
@@ -28,27 +28,13 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#")) {
-      const targetId = href.replace("/#", "");
-      if (pathname === "/") {
-        e.preventDefault();
-        const elem = document.getElementById(targetId);
-        if (elem) {
-          elem.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    }
-  };
-
   return (
     <header
-      suppressHydrationWarning
       className={cn(
-        "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ease-in-out",
+        "fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out",
         scrolled
-          ? "bg-[#071A2B]/90 backdrop-blur-md border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
-          : "bg-transparent border-b border-transparent"
+          ? "top-4 w-[calc(100%-2rem)] max-w-5xl bg-[#020617]/85 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/10 rounded-full"
+          : "top-0 w-full max-w-none bg-transparent border-b border-transparent"
       )}
     >
       <nav className={cn(
@@ -68,7 +54,7 @@ export function Header() {
             "font-bold tracking-tighter text-white transition-all duration-300",
             scrolled ? "text-xl" : "text-2xl"
           )}>
-            Sevora<span className="text-[#1677FF]">Lab</span>
+            Sevora<span className="text-accent">Lab</span>
           </span>
         </Link>
 
@@ -77,47 +63,43 @@ export function Header() {
           className="hidden md:flex items-center gap-6"
           onMouseLeave={() => setHoveredPath(null)}
         >
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href || (link.href === "/#services" && pathname === "/services");
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                onMouseEnter={() => setHoveredPath(link.href)}
-                className={cn(
-                  "text-sm font-medium transition-all duration-300 relative py-2 px-4 rounded-full",
-                  isActive ? "text-[#1677FF] font-semibold" : "text-white/80 hover:text-white"
-                )}
-              >
-                <span className="relative z-10">{link.name}</span>
-                {hoveredPath === link.href && (
-                  <motion.div
-                    layoutId="hover-pill"
-                    className="absolute inset-0 bg-white/[0.04] border border-white/5 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                  />
-                )}
-                {isActive && (
-                  <motion.div
-                    layoutId="nav-underline"
-                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#1677FF]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onMouseEnter={() => setHoveredPath(link.href)}
+              className={cn(
+                "text-sm font-medium transition-all duration-300 relative py-2 px-4 rounded-full",
+                pathname === link.href ? "text-accent font-semibold" : "text-white/80 hover:text-white"
+              )}
+            >
+              <span className="relative z-10">{link.name}</span>
+              {hoveredPath === link.href && (
+                <motion.div
+                  layoutId="hover-pill"
+                  className="absolute inset-0 bg-white/[0.04] border border-white/5 rounded-full"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              {pathname === link.href && (
+                <motion.div
+                  layoutId="nav-underline"
+                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-accent"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </Link>
+          ))}
           <Link href="/contact" className="ml-2">
             <Button variant="accent" size="sm" className="group relative overflow-hidden">
               <span className="relative z-10 flex items-center gap-1">
                 Start Project
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1677FF] via-[#4DA3FF] to-[#1677FF] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent via-[#6366F1] to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </Button>
           </Link>
         </div>
@@ -142,32 +124,30 @@ export function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute left-0 top-full w-full bg-[#071A2B]/95 backdrop-blur-lg shadow-2xl px-6 py-8 flex flex-col gap-6 rounded-b-3xl border-b border-white/10 transition-all duration-300"
+            className={cn(
+              "md:hidden absolute left-0 w-full bg-[#020617]/95 backdrop-blur-lg shadow-2xl px-6 py-8 flex flex-col gap-6 transition-all duration-300",
+              scrolled
+                ? "top-[calc(100%+0.5rem)] rounded-3xl border border-white/10"
+                : "top-full rounded-b-3xl border-b border-white/10"
+            )}
           >
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href === "/#services" && pathname === "/services");
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    setIsOpen(false);
-                    handleNavClick(e, link.href);
-                  }}
-                  className={cn(
-                    "text-lg font-medium",
-                    isActive ? "text-[#1677FF]" : "text-white/80 transition-colors hover:text-[#1677FF]"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-            <Link href="/contact" onClick={() => setIsOpen(false)}>
-              <Button variant="accent" className="w-full">
-                Start Project
-              </Button>
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  "text-lg font-medium",
+                  pathname === link.href ? "text-[#3B82F6]" : "text-white/80 transition-colors hover:text-[#3B82F6]"
+                )}
+              >
+
+                {link.name}
+              </Link>
+            ))}
+            <Button variant="accent" className="w-full">
+              Start Project
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

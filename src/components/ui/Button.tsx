@@ -12,11 +12,11 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", ...props }, ref) => {
     const variants = {
-      primary: "primary-gradient text-white shadow-lg hover:shadow-[#1677FF]/30",
-      secondary: "bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-[#4DA3FF]/40",
-      outline: "border-2 border-[#1677FF] text-[#1677FF] hover:bg-[#1677FF] hover:text-white hover:border-[#1677FF] transition-all shadow-[0_0_15px_rgba(22,119,255,0.15)]",
+      primary: "primary-gradient text-white shadow-lg hover:shadow-blue-500/20",
+      secondary: "bg-white/5 text-white hover:bg-white/10 border border-white/10",
+      outline: "border-2 border-[#3B82F6] text-[#3B82F6] hover:bg-[#3B82F6] hover:text-white transition-all shadow-[0_0_15px_rgba(59,130,246,0.1)]",
       ghost: "text-white/70 hover:bg-white/5 hover:text-white",
-      accent: "bg-[#1677FF] text-white hover:bg-[#4DA3FF] shadow-[0_0_20px_rgba(22,119,255,0.25)] font-bold",
+      accent: "bg-[#3B82F6] text-white hover:bg-[#2563EB] shadow-lg shadow-blue-500/20 font-bold",
     };
 
     const sizes = {
@@ -31,7 +31,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className={cn(
-          "inline-flex items-center justify-center rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#1677FF] focus:ring-offset-2 focus:ring-offset-[#071A2B] disabled:opacity-50 disabled:pointer-events-none",
+          "inline-flex items-center justify-center rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:ring-offset-2 focus:ring-offset-[#020617] disabled:opacity-50 disabled:pointer-events-none",
           variants[variant],
           sizes[size],
           className

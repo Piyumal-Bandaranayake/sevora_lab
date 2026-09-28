@@ -73,11 +73,11 @@ export default function ContactClient() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#071A2B] relative overflow-hidden isolate">
+    <div className="flex flex-col min-h-screen bg-[#020617] relative overflow-hidden isolate">
       {/* Background design: dots */}
       <BGPattern variant="dots" fill="rgba(255,255,255,0.08)" size={32} mask="fade-edges" />
       {/* Dark overlay to blend in */}
-      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#071A2B]/50 via-transparent to-[#071A2B] pointer-events-none" />
+      <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] pointer-events-none" />
 
       <Header />
       
@@ -88,9 +88,10 @@ export default function ContactClient() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-bold text-white mb-8"
           >
-            Let's Start a <span className="text-[#1677FF] underline decoration-4 underline-offset-8">Conversation</span>
+            <span className="sr-only">Hire Web Designers & Developers Sri Lanka | Contact Sevora Lab - </span>
+            Let's Start a <span className="text-[#3B82F6] underline decoration-4 underline-offset-8">Conversation</span>
           </motion.h1>
-          <p className="text-xl text-[#EAF4FF]/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
             Ready to elevate your digital presence? We're here to help you navigate the future of the web.
           </p>
         </section>
@@ -106,19 +107,19 @@ export default function ContactClient() {
             </div>
  
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-8 rounded-3xl glass border-white/5 space-y-4 hover:border-[#1677FF]/30 transition-all group">
-                <div className="w-12 h-12 bg-[#1677FF]/10 rounded-2xl flex items-center justify-center text-[#1677FF] shadow-lg transition-transform group-hover:scale-110">
+              <div className="p-8 rounded-3xl glass border-white/5 space-y-4 hover:border-[#3B82F6]/30 transition-all group">
+                <div className="w-12 h-12 bg-[#3B82F6]/10 rounded-2xl flex items-center justify-center text-[#3B82F6] shadow-lg transition-transform group-hover:scale-110">
                   <Phone size={24} />
                 </div>
                 <h4 className="font-bold text-white text-lg">Call Us</h4>
-                <p className="text-[#EAF4FF]/70 font-medium">+94 77 575 2149</p>
+                <p className="text-white/60 font-medium">+94 77 575 2149</p>
               </div>
-              <div className="p-8 rounded-3xl glass border-white/5 space-y-4 hover:border-[#1677FF]/30 transition-all group">
-                <div className="w-12 h-12 bg-[#1677FF]/10 rounded-2xl flex items-center justify-center text-[#1677FF] shadow-lg transition-transform group-hover:scale-110">
+              <div className="p-8 rounded-3xl glass border-white/5 space-y-4 hover:border-[#3B82F6]/30 transition-all group">
+                <div className="w-12 h-12 bg-[#3B82F6]/10 rounded-2xl flex items-center justify-center text-[#3B82F6] shadow-lg transition-transform group-hover:scale-110">
                   <Mail size={24} />
                 </div>
                 <h4 className="font-bold text-white text-lg">Email Us</h4>
-                <a href="mailto:sevoralab@gmail.com" className="text-[#EAF4FF]/70 font-medium hover:text-white transition-colors">sevoralab@gmail.com</a>
+                <a href="mailto:sevoralab@gmail.com" className="text-white/60 font-medium hover:text-white transition-colors">sevoralab@gmail.com</a>
               </div>
             </div>
  
@@ -138,7 +139,7 @@ export default function ContactClient() {
                   <div className="space-y-2">
                     <h3 className="text-2xl font-bold text-white">Inquiry Sent Successfully!</h3>
                     <p className="text-white/60 max-w-md mx-auto text-sm leading-relaxed">
-                      Thank you for reaching out. We have received your project details and will get back to you at <span className="text-[#1677FF] font-semibold">{submittedEmail}</span> within 24 hours.
+                      Thank you for reaching out. We have received your project details and will get back to you at <span className="text-[#3B82F6] font-semibold">{submittedEmail}</span> within 24 hours.
                     </p>
                   </div>
                   <Button
@@ -181,7 +182,7 @@ export default function ContactClient() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="e.g. John Doe"
-                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/20 focus:outline-none focus:border-[#1677FF] focus:ring-1 focus:ring-[#1677FF] transition-all"
+                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/20 focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6] transition-all"
                         />
                       </div>
                       <div className="space-y-2">
@@ -192,7 +193,7 @@ export default function ContactClient() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="e.g. john@example.com"
-                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/20 focus:outline-none focus:border-[#1677FF] focus:ring-1 focus:ring-[#1677FF] transition-all"
+                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/20 focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6] transition-all"
                         />
                       </div>
                     </div>
@@ -203,13 +204,13 @@ export default function ContactClient() {
                         <select
                           value={service}
                           onChange={(e) => setService(e.target.value)}
-                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#1677FF] focus:ring-1 focus:ring-[#1677FF] transition-all appearance-none cursor-pointer"
+                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6] transition-all appearance-none cursor-pointer"
                         >
-                          <option value="Web Development" className="bg-[#071A2B] text-white">Web Development</option>
-                          <option value="E-commerce Solutions" className="bg-[#071A2B] text-white">E-commerce Solutions</option>
-                          <option value="UI/UX Design" className="bg-[#071A2B] text-white">UI/UX Design</option>
-                          <option value="Logo & Branding" className="bg-[#071A2B] text-white">Logo & Branding</option>
-                          <option value="Other" className="bg-[#071A2B] text-white">Other Inquiry</option>
+                          <option value="Web Development" className="bg-[#020617] text-white">Web Development</option>
+                          <option value="E-commerce Solutions" className="bg-[#020617] text-white">E-commerce Solutions</option>
+                          <option value="UI/UX Design" className="bg-[#020617] text-white">UI/UX Design</option>
+                          <option value="Logo & Branding" className="bg-[#020617] text-white">Logo & Branding</option>
+                          <option value="Other" className="bg-[#020617] text-white">Other Inquiry</option>
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-white/50">
                           <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -227,7 +228,7 @@ export default function ContactClient() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Describe your project goals, features needed, timeline, etc."
-                        className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/20 focus:outline-none focus:border-[#1677FF] focus:ring-1 focus:ring-[#1677FF] transition-all h-36 resize-none"
+                        className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/20 focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6] transition-all h-36 resize-none"
                       />
                     </div>
 

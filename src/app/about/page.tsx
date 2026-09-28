@@ -2,8 +2,8 @@ import AboutClient from "./AboutClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn about Sevora Lab, a premier software development and digital design studio based in Sri Lanka. Meet our team and explore our values of innovation, precision, and trust.",
+  title: "About Us | Web Designers & Developers",
+  description: "Meet Sevora Lab, a progressive web development and creative software company in Sri Lanka. Discover our mission, core values, and expert team.",
   keywords: [
     "about sevora lab",
     "sevora lab team",
