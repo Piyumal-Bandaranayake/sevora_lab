@@ -2,6 +2,8 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Metadata } from "next";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { Preloader } from "@/components/Preloader";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -14,9 +16,67 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sevora Lab | Modern Web Solutions for Singapore Businesses",
-  description: "Sevora Lab is a premier web development company in Sri Lanka specializing in high-performance, beautiful websites for Singapore businesses.",
-  keywords: ["web development", "Singapore", "Sri Lanka", "Next.js", "agency", "tech solutions", "SEO", "Logo Design", "Videography", "Dronagraphy", "Social Media Design"],
+  metadataBase: new URL("https://www.sevoralab.studio"),
+  title: {
+    default: "Sevora Lab | Premium Web Development & Digital Studio in Sri Lanka",
+    template: "%s | Sevora Lab",
+  },
+  description: "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",
+  keywords: [
+    "sevora lab",
+    "sevoralab",
+    "sevoralab.studio",
+    "sevora lab studio",
+    "sevora lab sri lanka",
+    "sevora lab matale",
+    "web development sri lanka",
+    "web development company sri lanka",
+    "software development company sri lanka",
+    "sri lanka tech developers",
+    "web design agency sri lanka",
+    "web designers in sri lanka",
+    "best web design company in sri lanka",
+    "next.js development sri lanka",
+    "react developers sri lanka",
+    "three.js developer sri lanka",
+    "custom web applications",
+    "creative digital agency sri lanka",
+    "e-commerce web development sri lanka",
+    "logo design sri lanka",
+    "branding agency matale",
+    "corporate website design sri lanka",
+    "digital marketing sri lanka",
+    "seo services sri lanka",
+    "search engine optimization sri lanka",
+    "mobile responsive web design",
+    "custom software development sri lanka"
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.sevoralab.studio",
+    siteName: "Sevora Lab",
+    title: "Sevora Lab | Premium Web Development & Digital Studio in Sri Lanka",
+    description: "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Sevora Lab - Premium Web Development & Digital Studio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sevora Lab | Premium Web Development & Digital Studio in Sri Lanka",
+    description: "Sevora Lab is a premier software development and digital design studio in Sri Lanka specializing in high-performance websites, custom web apps, and creative branding solutions.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +86,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className={`${outfit.variable} ${inter.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
-        <Providers>{children}</Providers>
+      <body
+        suppressHydrationWarning
+        className={`${outfit.variable} ${inter.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
+      >
+        <Providers>
+          <Preloader />
+          {children}
+          <WhatsAppButton />
+        </Providers>
       </body>
     </html>
   );

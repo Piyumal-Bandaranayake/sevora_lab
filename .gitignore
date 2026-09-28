@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+.agents
+skills-lock.json
 
 # next.js
 /.next/
@@ -30,7 +32,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
+.env*.local
+!.env.example
+!.env.local.example
 
 # vercel
 .vercel
@@ -39,3 +44,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 config.bat
+

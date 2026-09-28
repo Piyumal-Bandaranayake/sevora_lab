@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-08T16:45:00Z",
+  "title": "Design System: Sevora Lab",
+  "extensions": {
+    "colorMeta": {
+      "primary-start": {
+        "role": "primary",
+        "displayName": "Cyber Start Blue",
+        "canonical": "oklch(38.25% 0.197 262.1)",
+        "tonalRamp": ["#07102e", "#0e1e52", "#162f80", "#1E40AF", "#3b5dc9", "#637ee0", "#92a6f2", "#ccd6ff"]
+      },
+      "primary-end": {
+        "role": "primary",
+        "displayName": "Cyber End Cyan",
+        "canonical": "oklch(80.59% 0.222 209.6)",
+        "tonalRamp": ["#003845", "#00627a", "#0099bd", "#00D1FF", "#4cdfff", "#80e9ff", "#b3f3ff", "#e6fcff"]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Deep Cosmic Void",
+        "canonical": "oklch(8.24% 0.035 258.9)",
+        "tonalRamp": ["#010208", "#020617", "#050f38", "#0b1d5c", "#16318c", "#2d4ec7", "#5a7aed", "#9bb1f7"]
+      },
+      "neutral-text": {
+        "role": "neutral",
+        "displayName": "Off-White Ink",
+        "canonical": "oklch(98.11% 0.008 243.6)",
+        "tonalRamp": ["#1e293b", "#475569", "#94a3b8", "#cbd5e1", "#e2e8f0", "#f1f5f9", "#F8FAFC", "#ffffff"]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Electric Blue Glow",
+        "canonical": "oklch(60.19% 0.222 254.2)",
+        "tonalRamp": ["#0a224a", "#123c82", "#1d5ebf", "#3B82F6", "#6aa3fa", "#98c2fc", "#c6defd", "#f0f6fe"]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Cyber Highlight Blue",
+        "canonical": "oklch(73.34% 0.169 253.9)",
+        "tonalRamp": ["#0b1a33", "#143161", "#214e9c", "#3b82f6", "#60A5FA", "#8ec0fc", "#bddbfe", "#ecf4ff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Title",
+        "purpose": "Primary hero section headers only, tight and impactful."
+      },
+      "body": {
+        "displayName": "Body Copy",
+        "purpose": "Standard paragraphs and descriptive blocks with high readability."
+      }
+    },
+    "shadows": [
+      {
+        "name": "Electric Hover Glow",
+        "value": "0 0 20px rgba(59, 130, 246, 0.3)",
+        "purpose": "Applied to active controls and main buttons when hovered."
+      },
+      {
+        "name": "Subtle Ambient Depth",
+        "value": "0 12px 40px rgba(0, 0, 0, 0.5)",
+        "purpose": "Presents elevated navigation bars and interface overrides."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Standard timing curve for all interactive transitions."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary call-to-action button, pill-shaped with background fill.",
+      "html": "<button class=\"ds-btn-primary\">Start Project <svg class=\"ds-btn-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line><polyline points=\"12 5 19 12 12 19\"></polyline></svg></button>",
+      "css": ".ds-btn-primary { background: #3B82F6; color: #FFFFFF; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; padding: 16px 32px; border: none; border-radius: 9999px; cursor: pointer; display: inline-flex; items-center: center; gap: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none; } .ds-btn-primary:hover { background: #2563EB; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); transform: translateY(-1px); } .ds-btn-icon { width: 16px; height: 16px; transition: transform 0.3s; } .ds-btn-primary:hover .ds-btn-icon { transform: translateX(2px); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "description": "Secondary or outline button, displaying borders and filling up on hover.",
+      "html": "<button class=\"ds-btn-outline\">View Work</button>",
+      "css": ".ds-btn-outline { background: transparent; color: #3B82F6; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; padding: 16px 32px; border: 2px solid #3B82F6; border-radius: 9999px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); outline: none; } .ds-btn-outline:hover { background: #3B82F6; color: #FFFFFF; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); transform: translateY(-1px); }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "description": "Standard content wrapper with glassmorphic backing and thin subtle border.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Premium Web Development</h3><p class=\"ds-card-text\">Custom crafted high-performance web systems tailored to business goals.</p></div>",
+      "css": ".ds-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 32px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .ds-card:hover { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); } .ds-card-title { color: #FFFFFF; font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 600; margin: 0 0 12px 0; } .ds-card-text { color: rgba(248, 250, 252, 0.8); font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.6; margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Deep Space Lab",
+    "overview": "The Sevora Lab design system is built to reflect the vast depth of space, combining dark cosmic backdrops with precise cybernetic layouts and glowing interactive elements. The aesthetic is clean, professional, and high-performance, proving the agency's technical mastery through premium presentation and tactile details. We explicitly reject generic, template-like SaaS aesthetics in favor of a custom, handcrafted digital studio identity. The layout values content density, high contrast, and immersive depth layers, making the interface feel alive yet reliable.",
+    "keyCharacteristics": [
+      "Deep cosmic background canvas with subtle gradients and light leak glows.",
+      "Clean grotesque display typography paired with highly legible humanist body text.",
+      "Glassmorphic layers used purposefully for content containers to establish elevation.",
+      "Soft, neon-colored ambient glows that react directly to user input."
+    ],
+    "rules": [
+      {
+        "name": "The Rarity of Glow Rule",
+        "body": "Saturated accents and glow effects are used on <=10% of any given screen. Their rarity is what establishes premium visual authority; over-saturating the interface turns a high-end studio into a gaming template.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Over Loudness Rule",
+        "body": "Do not set display headlines above 6rem. Visual impact is created by pairing heavy, tightly tracked display headers with lightweight, spacious body paragraphs, not by making letters massive.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-at-Rest Rule",
+        "body": "Containers and cards do not cast drop shadows unless hovered or in a distinct active state. Depth is generated by structural borders and backdrop-blur overlays.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do respect prefers-reduced-motion by disabling translate/zoom animations and replacing them with instant or opacity-only fades.",
+      "Do check contrast for body text against dark backgrounds (ensure body copy uses white/80% or white/60% instead of dark gray).",
+      "Do wrap long headings using text-wrap: balance to prevent awkward typography orphans on mobile."
+    ],
+    "donts": [
+      "Don't use warm, beige, cream, or sand background defaults (token colors like --paper, --cream, --sand, --bone).",
+      "Don't use side-stripe borders (e.g. border-left or border-right accent strokes greater than 1px) to highlight cards or alerts.",
+      "Don't apply borders and heavy drop shadows (blur >= 16px) on the same container at rest (the 'ghost-card' pattern).",
+      "Don't use border-radii greater than 24px on cards and containers.",
+      "Don't place repetitive, identical card grids with the same size and layout recursively down the page.",
+      "Don't use tiny uppercase wide-tracked eyebrows above every section as default scaffolding."
+    ]
+  }
+}
