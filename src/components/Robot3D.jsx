@@ -255,7 +255,7 @@ export default function Robot3D() {
             intensity={0.8}
           />
 
-          <RobotModel />
+          {/* <RobotModel /> */}
 
           <OrbitControls
             enableZoom={false}
@@ -271,4 +271,4 @@ export default function Robot3D() {
   );
 }
 
-useGLTF.preload("/models/robot.glb");
+// useGLTF.preload("/models/robot.glb");
