@@ -34,10 +34,6 @@ yarn-error.log*
 
 # env files
 .env*.local
-.env
-.env.production
-.env.development
-.env.test
 !.env.example
 !.env.local.example
 
