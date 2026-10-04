@@ -17,17 +17,11 @@ import { ExpertiseCard } from "@/components/ExpertiseCard";
 import { ProjectCard } from "@/components/ProjectCard";
 import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
-import { TechSection } from "@/components/TechSection";
+import { IdeaToProductSection } from "@/components/IdeaToProductSection";
+
 import { BGPattern } from "@/components/ui/bg-pattern";
 
-const Robot3D = dynamic(() => import("@/components/Robot3D"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[400px] md:h-[550px] lg:h-[600px] flex items-center justify-center">
-      <div className="w-12 h-12 border-2 border-[#3B82F6] border-t-transparent rounded-full animate-spin" />
-    </div>
-  ),
-});
+
 
 const stats = [
   { label: "Successful Projects", value: "10+", icon: Trophy },
@@ -61,16 +55,10 @@ const heroItemVariants = {
 
 export default function HomeClient() {
   const [isMounted, setIsMounted] = useState(false);
-  const [animationDelay, setAnimationDelay] = useState(4.2);
+  const [animationDelay, setAnimationDelay] = useState(0.1);
 
   useEffect(() => {
     setIsMounted(true);
-    if (typeof window !== "undefined") {
-      const hasRun = sessionStorage.getItem("preloader-run");
-      if (hasRun) {
-        setAnimationDelay(0.1);
-      }
-    }
   }, []);
 
   // Portfolio slideshow states
@@ -108,7 +96,7 @@ export default function HomeClient() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-[#020617] py-20">
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-[#020617] py-20">
           {/* Hero background image */}
           <div
             className="absolute inset-0 z-0 opacity-70 bg-cover bg-center pointer-events-none"
@@ -136,16 +124,16 @@ export default function HomeClient() {
             }}
           />
 
-          <div className="container mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center">
+            <div className="max-w-4xl mx-auto w-full">
 
-              {/* Left Side – Text Content */}
+              {/* Center Content */}
               <motion.div
                 variants={heroContainerVariants}
                 custom={animationDelay}
                 initial="hidden"
                 animate={isMounted ? "visible" : "hidden"}
-                className="space-y-6 text-center lg:text-left order-2 lg:order-1"
+                className="space-y-6 text-center"
               >
                 <motion.h1 
                   variants={heroItemVariants}
@@ -157,14 +145,14 @@ export default function HomeClient() {
 
                 <motion.p 
                   variants={heroItemVariants}
-                  className="text-lg md:text-xl text-white/60 max-w-lg mx-auto lg:mx-0 leading-relaxed"
+                  className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed"
                 >
                   We craft high-performance web applications and stunning digital experiences that elevate your brand and drive real results.
                 </motion.p>
 
                 <motion.div 
                   variants={heroItemVariants}
-                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
+                  className="flex flex-col sm:flex-row gap-4 justify-center pt-2"
                 >
                   <Link href="/contact">
                     <Button size="lg" variant="accent" className="min-w-[180px] group">
@@ -182,25 +170,15 @@ export default function HomeClient() {
                 {/* Quick stats row */}
                 <motion.div 
                   variants={heroItemVariants}
-                  className="flex gap-8 justify-center lg:justify-start pt-4"
+                  className="flex gap-8 justify-center pt-4"
                 >
                   {stats.map((stat, i) => (
-                    <div key={i} className="text-center lg:text-left">
+                    <div key={i} className="text-center">
                       <div className="text-2xl font-bold text-white">{stat.value}</div>
                       <div className="text-xs text-white/40 uppercase tracking-wider">{stat.label}</div>
                     </div>
                   ))}
                 </motion.div>
-              </motion.div>
-
-              {/* Right Side – 3D Robot */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-                className="order-1 lg:order-2"
-              >
-                <Robot3D />
               </motion.div>
 
             </div>
@@ -241,8 +219,8 @@ export default function HomeClient() {
           </div>
         </section>
 
-        {/* Technologies Section */}
-        <TechSection />
+        {/* Process Section */}
+        <IdeaToProductSection />
 
         {/* Portfolio Preview */}
         <section className="py-24 bg-[#0A1128]/40 border-y border-white/5 relative overflow-hidden isolate">
