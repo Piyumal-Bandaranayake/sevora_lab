@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Rocket, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +19,6 @@ const navLinks = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -41,81 +40,78 @@ export function Header() {
         "w-full max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between transition-all duration-300",
         scrolled ? "py-3 md:py-3.5" : "py-4 md:py-5"
       )}>
-        <Link href="/" className="flex items-center gap-2 group">
-          <img
-            src="/images/Clogo.png"
-            alt="Sevora Lab Logo"
-            className={cn(
-              "w-auto object-contain transition-all duration-300 group-hover:scale-105",
-              scrolled ? "h-6 md:h-7" : "h-8 md:h-9"
-            )}
-          />
-          <span className={cn(
-            "font-bold tracking-tighter text-white transition-all duration-300",
-            scrolled ? "text-xl" : "text-2xl"
-          )}>
-            Sevora<span className="text-accent">Lab</span>
-          </span>
-        </Link>
-
-        {/* Desktop Nav */}
-        <div 
-          className="hidden md:flex items-center gap-6"
-          onMouseLeave={() => setHoveredPath(null)}
-        >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onMouseEnter={() => setHoveredPath(link.href)}
+        {/* Left: Logo */}
+        <div className="flex-1 flex items-center justify-start">
+          <Link href="/" className="flex items-center gap-2 group">
+            <img
+              src="/images/Clogo.png"
+              alt="Sevora Lab Logo"
               className={cn(
-                "text-sm font-medium transition-all duration-300 relative py-2 px-4 rounded-full",
-                pathname === link.href ? "text-accent font-semibold" : "text-white/80 hover:text-white"
+                "w-auto object-contain transition-all duration-300 group-hover:scale-105",
+                scrolled ? "h-6 md:h-7" : "h-8 md:h-9"
               )}
-            >
-              <span className="relative z-10">{link.name}</span>
-              {hoveredPath === link.href && (
-                <motion.div
-                  layoutId="hover-pill"
-                  className="absolute inset-0 bg-white/[0.04] border border-white/5 rounded-full"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                />
-              )}
-              {pathname === link.href && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-accent"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </Link>
-          ))}
-          <Link href="/contact" className="ml-2">
-            <Button variant="accent" size="sm" className="group relative overflow-hidden">
-              <span className="relative z-10 flex items-center gap-1">
-                Start Project
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-accent via-[#6366F1] to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-            </Button>
+            />
+            <span className={cn(
+              "font-bold tracking-tighter text-white transition-all duration-300",
+              scrolled ? "text-xl" : "text-2xl"
+            )}>
+              Sevora<span className="text-[#3B82F6]">Lab</span>
+            </span>
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-4">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-white p-2"
-            aria-label="Toggle navigation menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+        {/* Center: Desktop Nav Links */}
+        <div className="hidden md:flex items-center justify-center gap-1 lg:gap-4">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-all duration-300 relative py-2 px-4 rounded-full",
+                  isActive ? "text-[#3B82F6] font-semibold" : "text-white/80 hover:text-[#3B82F6]"
+                )}
+              >
+                <span className="relative z-10">{link.name}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#3B82F6] shadow-[0_0_8px_rgba(59,130,246,0.6)]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Right: CTA Button & Mobile Toggle */}
+        <div className="flex-1 flex items-center justify-end">
+          <div className="hidden md:block">
+            <Link href="/contact">
+              <Button variant="accent" size="sm" className="group relative overflow-hidden bg-[#3B82F6] hover:bg-[#2563EB]">
+                <span className="relative z-10 flex items-center gap-1">
+                  Start Project
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6] via-[#6366F1] to-[#3B82F6] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Toggle */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white p-2"
+              aria-label="Toggle navigation menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </nav>
-
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -136,13 +132,14 @@ export function Header() {
                   pathname === link.href ? "text-[#3B82F6]" : "text-white/80 transition-colors hover:text-[#3B82F6]"
                 )}
               >
-
                 {link.name}
               </Link>
             ))}
-            <Button variant="accent" className="w-full">
-              Start Project
-            </Button>
+            <Link href="/contact" onClick={() => setIsOpen(false)}>
+              <Button variant="accent" className="w-full bg-[#3B82F6] hover:bg-[#2563EB]">
+                Start Project
+              </Button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
