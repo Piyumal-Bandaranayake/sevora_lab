@@ -31,15 +31,15 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out",
         scrolled
-          ? "top-4 w-[calc(100%-2rem)] max-w-5xl bg-[#020617]/85 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/10 rounded-full"
-          : "top-0 w-full max-w-none bg-transparent border-b border-transparent"
+          ? "bg-[#020617]/90 backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.5)] border-b border-white/10"
+          : "bg-transparent border-b border-transparent"
       )}
     >
       <nav className={cn(
-        "container mx-auto px-6 flex items-center justify-between transition-all duration-300",
-        scrolled ? "py-2.5" : "py-4"
+        "w-full max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between transition-all duration-300",
+        scrolled ? "py-3 md:py-3.5" : "py-4 md:py-5"
       )}>
         <Link href="/" className="flex items-center gap-2 group">
           <img
@@ -124,12 +124,7 @@ export function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={cn(
-              "md:hidden absolute left-0 w-full bg-[#020617]/95 backdrop-blur-lg shadow-2xl px-6 py-8 flex flex-col gap-6 transition-all duration-300",
-              scrolled
-                ? "top-[calc(100%+0.5rem)] rounded-3xl border border-white/10"
-                : "top-full rounded-b-3xl border-b border-white/10"
-            )}
+            className="md:hidden absolute left-0 top-full w-full bg-[#020617]/95 backdrop-blur-lg shadow-2xl px-6 py-8 flex flex-col gap-6 transition-all duration-300 rounded-b-2xl border-b border-white/10"
           >
             {navLinks.map((link) => (
               <Link

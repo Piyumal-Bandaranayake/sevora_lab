@@ -18,7 +18,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
 import { IdeaToProductSection } from "@/components/IdeaToProductSection";
-
+import { TechSection } from "@/components/TechSection";
 import { BGPattern } from "@/components/ui/bg-pattern";
 
 
@@ -221,6 +221,9 @@ export default function HomeClient() {
 
         {/* Process Section */}
         <IdeaToProductSection />
+
+        {/* Technologies Section */}
+        <TechSection />
 
         {/* Portfolio Preview */}
         <section className="py-24 bg-[#0A1128]/40 border-y border-white/5 relative overflow-hidden isolate">
