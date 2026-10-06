@@ -18,8 +18,9 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
 import { IdeaToProductSection } from "@/components/IdeaToProductSection";
-import { TechSection } from "@/components/TechSection";
 import { BGPattern } from "@/components/ui/bg-pattern";
+
+const SideRays = dynamic(() => import("@/components/SideRays"), { ssr: false });
 
 
 
@@ -97,18 +98,29 @@ export default function HomeClient() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center overflow-hidden bg-[#020617] py-20">
-          {/* Hero background image */}
-          <div
-            className="absolute inset-0 z-0 opacity-70 bg-cover bg-center pointer-events-none"
-            style={{
-              backgroundImage: "url('/images/background.jpg')",
-            }}
-          />
+          {/* Hero background gradient overlay */}
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-[#020617]/40 to-[#020617] pointer-events-none" />
 
           {/* Background glow effects */}
           <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[120px]" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#6366F1]/5 rounded-full blur-[100px]" />
+
+          {/* SideRays WebGL overlay */}
+          <div className="absolute inset-0 z-5 pointer-events-none w-full h-full overflow-hidden">
+            <SideRays
+              speed={1.8}
+              rayColor1="#3B82F6"
+              rayColor2="#00D1FF"
+              intensity={1.5}
+              spread={2.0}
+              origin="top-right"
+              tilt={0}
+              saturation={1.5}
+              blend={0.5}
+              falloff={1.6}
+              opacity={0.6}
+            />
+          </div>
 
           {/* White spotlight behind the robot */}
           <div
@@ -221,9 +233,6 @@ export default function HomeClient() {
 
         {/* Process Section */}
         <IdeaToProductSection />
-
-        {/* Technologies Section */}
-        <TechSection />
 
         {/* Portfolio Preview */}
         <section className="py-24 bg-[#0A1128]/40 border-y border-white/5 relative overflow-hidden isolate">
